@@ -1,0 +1,642 @@
+---
+title: "MyStudy Report"
+subtitle: "An Example Dynamic Document"
+author: 
+  - name: Steven J. Pierce
+    orcid: 0000-0002-0679-3019
+    email: pierces1@msu.edu
+    affiliations: 
+      - name: Michigan State University, Center for Statistical Training and Consulting
+bibliography: ../references.bib
+csl: ../apa.csl
+date: now
+date-modified: last-modified
+date-format: YYYY-MM-DD HH:mm:ss z
+params:
+  SourceDir: "scripts/"
+  SourceFile: "MyStudy_Report.qmd"
+  LogFile: "MyStudy_Report.html"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    number-depth: 3
+    code-fold: true 
+    code-tools: true
+    code-line-numbers: false
+    embed-resources: true 
+    anchor-sections: true
+execute:
+  eval: true
+  echo: fenced
+  output: true
+  warning: true
+  error: true
+  include: true
+knitr:
+  opts_chunk: 
+    message: true
+---
+
+# Purpose
+This report summarizes findings from analyses of the MyStudy data, which is 
+simulated, fictional example data for my AARUG 2024 presentation [@Pierce-RN8655]. 
+It is formatted the way I would handle an internal report for the study team 
+rather than how I would handle a deliverable to an external stakeholder, so it 
+emphasizes clarity and technical detail for repeatability, reproducibility, and 
+teaching purposes. 
+
+::: {.callout-note}
+This report illustrates how Quarto scripts act as dynamic documents. It shows 
+some (but by no means all) of the things they can do. This box is a Quarto 
+[callout block](https://quarto.org/docs/authoring/callouts.html). There are 
+several variations of callouts that have different formatting, icons, and 
+labels. 
+:::
+
+::: {.callout-tip}
+We can format body text in a **bold font** by surrounding it with double 
+asterisks. Using a single asterisk on each side would *italicize* the text 
+instead. To format the previous two sentences, I put the following in the 
+script:
+
+```
+We can format body text in a **bold font** by surrounding it with double 
+asterisks. Using a single asterisk on each side would *italicize* the text 
+instead. 
+```
+:::
+
+# Setup
+
+## Declare Path
+This next chunk declares the path to this script relative to the project-level 
+root directory. If the file is not in the right location under the project root
+you'll get a warning message. This helps ensure relative paths are all working 
+as expected. 
+
+``` {r}
+#| label: declare-path
+
+# Declare path to this script relative to the project root directory.
+here::i_am(path = paste0(params$SourceDir, params$SourceFile))
+```
+
+::: {.callout-tip}
+For this chunk to work, you must have the relevant parameters set properly in 
+the YAML header. 
+
+* The `SourceDir` parameter should be a text string with the the relative path 
+  from the RStudio project root folder to the folder where this file is stored. 
+* The `SourceFile` parameter should be a text string containing the name of this 
+  file. 
+* You can use the parameter values in R code by prefixing their names with 
+  `params$` as shown in the chunk above.
+:::
+
+## Load Packages
+R packages usually add new functions to the base R software, allowing you to do 
+more things. Here, we load the specific R packages required for this script to 
+work. Showing this section in your report is an example of documenting methods 
+details about the software you are using. 
+
+```{r}
+#| label: load-packages
+
+library(here)           # for here(), to make code more portable 
+library(devtools)       # for session_info()
+library(rmarkdown)      # for pandoc_version()
+library(knitr)          # for kable()
+library(dplyr)          # for %>%, bind_cols(), rename(), etc.
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)     # for kable_styling(), add_header_above(), 
+                        # column_spec(), row_spec()
+library(ggplot2)        # for scale_x_continuous()
+library(car)            # for Anova()
+library(broom)          # for glance(), tidy()
+library(emmeans)        # for emmeans()
+library(modelsummary)   # for modelsummary()
+options(modelsummary_factory_html = 'kableExtra')
+library(piercer)        # for git_report(), sim_2arm_prepost()
+library(quarto)         # for quarto_version()
+```
+
+## Load Data
+Following the **separation principle**, the data are stored separate from the 
+code that manages or analyzes them. So, we need to load the MyStudy data from 
+an `*.RData` file stored in the local repository. That will overwrite any 
+objects already in memory that have the same names as the objects being loaded.
+
+::: {.callout-important}
+Run the `scripts/Create_MyStudy_Data.qmd` script to create the data file to be 
+loaded below. 
+:::
+
+``` {r}
+#| label: load-MyStudy-data
+
+load(file=here("data/MyStudy.RData"))
+```
+
+# Methods
+
+## Study Design
+The study used a longitudinal randomized controlled trial design with 2 groups 
+(Treatment vs. Control) x 4 sites (A, B, C, and D) x 2 time points (pretest vs. 
+posttest). Potential participants were recruited and screened for eligibility. 
+Eligible individuals who consented to participate were enrolled, then given 
+the pretest before being randomly assigned to either the treatment or control 
+group. The treatment group then received a 9-week intervention intended to 
+increase outcome scores. The control group did not receive any intervention. 
+After the 9 week intervention period, both groups were given the posttest. 
+The study design can be visualized with Shadish, Cook, & Campbell's 
+[-@Shadish-RN956] design notation, as shown in @tbl-study-design. 
+
+```{r}
+#| label: tbl-study-design
+#| tbl-cap: MyStudy Experimental Research Design
+#| results: asis
+
+StudyDesign <- data.frame(Group = c("Treatment", "Control"),
+                          Pretest = rep("$O_1$", times = 2),
+                          Allocation = rep("$R$", times = 2),
+                          Intervention = c("$X$", ""),
+                          Posttest = rep("$O_2$", times = 2)) 
+
+FN <- paste("The same design was used within each of 4 sites (A, B, C, & D).", 
+            "$O_i$, observed data at time $i$;", 
+            "$R$, randomized;",
+            "$X$, delivery of intervention (9 weeks).")
+kable(StudyDesign, format = "html", escape = FALSE, align = "lcccc") %>% 
+  kable_styling(full_width = FALSE) %>% 
+  add_header_above(c(" ", "Longitudinal Event" = 4), escape = FALSE) %>% 
+  footnote(general = FN, general_title = "Note: ", footnote_as_chunk = TRUE,
+           threeparttable = FALSE, escape = FALSE) %>% 
+  cat()
+```
+
+::: {.callout-tip}
+Quarto allows you to automate numbering tables. Just give the chunk that 
+generates a table a *unique* label with the prefix `tbl-` and then insert a 
+[cross-reference](https://quarto.org/docs/authoring/tables.html#cross-references) 
+into the script's body text. The cross-reference for @tbl-study-design is 
+`@tbl-study-design`, which is just the label of the chunk prefixed by an `@` 
+sign. 
+:::
+
+::: {.callout-tip}
+Suppose I want to show how many participants there are broken down by 
+group and site as a means of further describing the study design. 
+**Integrating a chunk of R code** into the document will **automate inserting** 
+**its results** into the output. Here's an example where I just use a pair of R 
+functions to look at the relevant crosstab.
+
+```{r}
+#| label: xtab-sample-size
+
+MyStudy %>% 
+  xtabs(~Site + Group, data = .) %>% 
+  addmargins()
+```
+
+The result is functional and accurate output that **preserves methodology**
+**details** (i.e., code). That might be sufficient if our only audience is going 
+to be people who are used to reading raw R output, but with just a little more 
+code, we can get a publication-quality result, as shown next. 
+:::
+
+Meanwhile, @tbl-sample-size shows the sample size by group and site.
+
+```{r}
+#| label: tbl-sample-size
+#| tbl-cap: Number of Participants by Group and Site
+#| results: asis
+
+FN = "This is fictional example data."
+
+MyStudy %>% 
+  xtabs(~Site + Group, data = .) %>% 
+  addmargins() %>% 
+  kable(col.names = c("Site", "Control", "Treatment", "Sum")) %>% 
+  kable_styling(full_width = FALSE) %>% 
+  column_spec(column = 4, italic = TRUE) %>% 
+  row_spec(row = 5, italic = TRUE) %>% 
+  add_header_above(header = c(" ", "Group" = 2, " ")) %>% 
+  footnote(general = FN, general_title = "Note: ", footnote_as_chunk = TRUE) %>% 
+  cat()
+```
+
+::: {.callout-tip}
+Notice that we have **automated** doing several things:
+
+* Numbered the table via the `label:` Quarto chunk option. 
+* Added a meaningful caption via the `tbl-cap:` Quarto chunk option.
+* Inserted the table number into the text above (as a hyperlink to the table 
+  itself) via a cross-reference.
+* Added a column grouping header.
+* Improved the column labels.
+* Added a footnote.
+* Formatted the sums with italics. 
+ 
+I used the [`knitr`](https://cran.r-project.org/package=knitr) and 
+[`kableExtra`](https://cran.r-project.org/package=kableExtra) R packages to 
+format @tbl-sample-size. Consider how long it would take you to turn the raw 
+result I showed first into table in a Word document, then format it like
+@tbl-sample-size. Automating such formatting work can save you time. If the
+underlying data changes, we can update @tbl-sample-size just by re-rendering the
+script.
+:::
+
+## Measures
+We have the following variables in the available dataset.
+
+### Participant ID (`PID`)
+Each participant received a unique, sequential integer identification number. 
+
+### Group (`Group`)
+Group is a nominal categorical factor with levels of `Treatment` and `Control`, 
+with `Control` as the reference level. 
+
+### Recruitment Site (`Site`)
+Site is a nominal, categorical factor with levels of `A`, `B`, `C`, `D`, with 
+`A` serving as the reference level. 
+
+### Outcome Scores (`Score_Pre` & `Score_Post`)
+Outcome scores were measured twice with continuous scale scores, once at pretest
+and once at posttest, using the same instrument. High scores represent better
+outcomes for the participants than low scores. Based on prior research, we
+expect at least modest correlation between pretest and posttest scores over the
+9-week duration of the study.
+
+## Statistical Analysis Plan
+The main objective of MyStudy is to test whether the intervention increased
+posttest outcome scores after controlling for pretest scores and recruitment
+site. We can use an analysis of covariance (ANCOVA) where group, site, and
+pretest scores predict the outcome scores to do that [@Vickers-RN2831]. A
+secondary objective is to test whether the sites differ with respect to
+outcomes. In the ANCOVA model, the group effect and associated contrast between
+the estimated marginal means for the two groups will directly allow us to
+examine the intervention effect [@Vickers-RN2831].
+
+To improve interpretation of model parameters, we will use a mean-centered form
+of the pretest scores (i.e., the variable `Centered_Score_Pre` instead of
+`Score_Pre`) [@Aiken-RN1306]. 
+
+We will use effect coding for the categorical factors (which is also called sum
+contrast coding) [@Schad-RN8224]. By default, R uses treatment dummy coding for
+factors, which we can see by checking the current contrast coding for group and
+site. For site, the default contrast coding is shown below.
+
+```{r}
+#| label: check-contrasts-Group
+
+# Default contrast coding for categorical factors.
+contrasts(MyStudy$Group) 
+```
+
+Next, we show the default contrast coding for site. 
+
+```{r}
+#| label: check-contrasts-Site
+
+# Default contrast coding for categorical factors.
+contrasts(MyStudy$Site) 
+```
+
+We change to effect coding then display the updated contrast codes in the next 
+two chunks below. 
+
+```{r}
+#| label: set-effect-coding-Group
+
+contrasts(MyStudy$Group) <- matrix(data = c(-1, 1), 
+                                   byrow = TRUE, nrow = 2, ncol = 1,
+                                   dimnames = list(c("Ctl", "Trt"),
+                                                   c("Treatment")))  
+contrasts(MyStudy$Group) # Updated
+```
+
+```{r}
+#| label: set-effect-coding-Site
+
+contrasts(MyStudy$Site) <-   matrix(data = c(-1, -1, -1,
+                                              1,  0,  0,
+                                              0,  1,  0,
+                                              0,  0,  1), 
+                                  byrow = TRUE, nrow = 4, ncol = 3,
+                                  dimnames = list(c("A", "B", "C", "D"),
+                                                  c("B", "C", "D")))
+contrasts(MyStudy$Site) # Updated
+```
+
+Note that contrast coding does not affect the Wald tests of individual 
+parameters, the overall model fit, or Type II sums of squares (SS) tests for 
+the significance of predictors. It does however change the value and meaning of 
+the intercept and of parameter estimates associated with categorical factors 
+[@Schad-RN8224]. With effect coding for categorical factors, the intercept
+estimates the grand mean when continuous predictors are set to 0. Factor
+parameter estimates test whether the means of individual levels differ from the
+grand mean. Regardless of contrast coding, one can still obtain estimated
+marginal means for the levels of factors and perform contrasts between them.
+
+To test for the effects of categorical factors with more than two levels (e.g.,
+site), we will use Type II ANOVA tests [@Hector-RN3472; @Langsrud-RN1287].
+Because there are no interactions in the model, these can be interpreted as the
+main effect of the indicated predictor after controlling for the other
+predictors in the model. They would be valid even if there were unbalanced
+sample sizes across cells in the factorial design.
+
+# Results
+The next chunk below fits the ANCOVA model. 
+
+```{r}
+#| label: fit-model
+
+m0 <- lm(Score_Post ~ 1, data = MyStudy)
+m1 <- lm(Score_Post ~ Centered_Score_Pre + Site + Group, data = MyStudy)
+```
+
+::: {.callout-tip}
+We could use the raw R output from a summary of the model, which would look like 
+this:
+
+```{r}
+#| label: raw-model-summary
+summary(m1)
+```
+
+But again, we can do something much more professional with a little more code,
+as shown below.
+:::
+
+@tbl-m1-paramters shows the ANCOVA model parameters and corresponding confidence 
+intervals, while @tbl-m1-fit shows its model fit statistics. 
+
+```{r}
+#| label: tbl-m1-paramters
+#| tbl-cap: Parameters for ANCOVA Model 1 for Posttest Scores
+#| results: asis
+
+FN = paste("Site reference is A, Group reference is Control;",
+           "95% CIs reported.")
+
+modelsummary(list("Model 1: Posttest Score" = m1), output = "kableExtra", 
+             align = "lrrrrr", escape = FALSE,
+             fmt = fmt_decimal(digits = 2, pdigits = 3),
+             col.names = c("Term", "Est.", "CI.LL", "CI.UL", "t", "p"),
+             shape = term ~ model + statistic, 
+             statistic = c("conf.int", "statistic", "p.value"), 
+             coef_rename = c("Intercept", "Centered Pretest Score", "Site: B", 
+                             "Site: C", "Site: D", "Group: Treatment"),
+             gof_map = "nobs", notes = FN) %>% 
+  cat()
+```
+
+```{r}
+#| label: tbl-m1-fit
+#| tbl-cap: Fit Statistics for ANCOVA Model 1 for Posttest Scores
+#| results: asis
+
+glance(m1) %>% 
+  select("sigma", "r.squared", "adj.r.squared", "logLik", "deviance", 
+         "AIC", "BIC", "statistic", "df", "df.residual", "p.value") %>% 
+  kable(., format = "html", digits = c(2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 6),
+        escape = TRUE,
+        col.names = c("Sigma", "$R^2$", "Adj. $R^2$", "LL", "Deviance", 
+                      "AIC", "BIC", "F", "df1", "df2", "p")) %>% 
+  kable_styling() %>% 
+  cat()
+```
+
+We can see from the Type II ANOVA tests [@Hector-RN3472; @Langsrud-RN1287] in 
+@tbl-m1-anova that there is no compelling evidence of a site 
+main effect after controlling for other predictors in the model, but there is 
+a group effect. 
+
+::: {.callout-tip}
+I used the [`modelsummary`](https://cran.r-project.org/package=modelsummary) 
+R package to automate formatting @tbl-m1-paramters and the 
+[`broom`](https://cran.r-project.org/package=broom), 
+[`knitr`](https://cran.r-project.org/package=knitr) and 
+[`kableExtra`](https://cran.r-project.org/package=kableExtra) R packages to 
+format @tbl-m1-fit.
+:::
+
+```{r}
+#| label: tbl-m1-anova
+#| tbl-cap: ANOVA Tests of Predictor Main Effects on Posttest Scores
+#| results: asis
+
+FN = paste("Site reference is A, Group reference is Control;",
+           "95% CIs reported.")
+
+# Same result regardless of contrast coding
+Anova(mod = m1, type = 2) %>% 
+  tidy() %>% 
+  mutate(term = if_else(term == "Centered_Score_Pre", 
+                        true = "Centered Pretest Score",
+                        false = term)) %>% 
+  kable(., format = "html", digits = c(0, 2, 0, 2, 5),
+        col.names = c("Term", "Type II SS", "df", "F", "p")) %>% 
+  kable_styling(full_width = FALSE) %>% 
+  cat()
+```
+
+::: {.callout-tip}
+I used the [`car`](https://cran.r-project.org/package=car) 
+R package to get the analysis in @tbl-m1-anova and the 
+[`broom`](https://cran.r-project.org/package=broom), 
+[`knitr`](https://cran.r-project.org/package=knitr) and 
+[`kableExtra`](https://cran.r-project.org/package=kableExtra) R packages to 
+format it.
+:::
+
+To further examine the results, we estimated the estimated marginal means for 
+each group (see @tbl-emm-Group) and visualize the result in @fig-emm-Group, 
+where the lack of overlap between the red arrows indicates a significant 
+difference. The unstandardized effect size for the group effect is shown in 
+@tbl-emm-Group-difftest. We can see that the treatment did indeed improve 
+posttest scores as intended. 
+
+```{r}
+#| label: tbl-emm-Group
+#| tbl-cap: Estimated Marginal Means for Posttest Scores by Group from Model 1
+#| results: asis
+
+emm_Group <- emmeans(m1, ~ Group)
+
+# Table footnote.
+FN <- "Results are averaged over the levels of site."
+
+emm_Group %>% 
+  as_tibble(.) %>% 
+  rename(Mean = emmean, LL= lower.CL, UL= upper.CL) %>% 
+  mutate(Group = factor(Group, levels = c("Ctl", "Trt"), 
+                        labels = c("Control", "Treatment"))) %>% 
+  kable(., format = "html", digits = 2) %>% 
+  kable_styling(full_width = FALSE) %>% 
+  add_header_above(header = c(" " = 4, "95% CI" = 2)) %>% 
+  footnote(general = FN, general_title = "Note: ", footnote_as_chunk = TRUE) %>% 
+  cat()
+```
+
+```{r}
+#| label: fig-emm-Group
+#| fig-cap: Estimated Marginal Means for Posttest Scores by Group from Model 1
+#| fig-height: 1.5
+#| fig-width: 6
+
+plot(emm_Group, comparisons = TRUE, xlab = "Posttest Score") +
+  scale_x_continuous(limits = c(70, 90), 
+                     breaks = seq(from = 70, to = 90, by = 5)) +
+  scale_y_discrete(labels = c("Control", "Treatment"))
+```
+
+```{r}
+#| label:  tbl-emm-Group-difftest
+#| tbl-cap: "Unstandardized Effect Size for Differences Between Group Means"
+#| results: asis
+
+# Table footnote.
+FN <- "Estimates are in the units of the posttest scores."
+
+pairwise_diff <- pairs(emm_Group, adjust = "none", reverse = TRUE) %>% 
+  summary(., infer = c(TRUE, FALSE), level = 0.95) %>% 
+  mutate(contrast = "Treatment -  Control") %>% 
+  select(contrast, estimate, SE, df, lower.CL, upper.CL)
+
+pairwise_diff %>%
+  kable(., format = "html", digits = 2, 
+      col.names = c("Comparison", "Estimate", "SE", "df", "LL", "UL")) %>%
+  kable_styling(full_width = FALSE) %>% 
+  add_header_above(header = c(" " = 4, "95% CI" = 2)) %>% 
+  footnote(., general = FN, threeparttable = TRUE, footnote_as_chunk=TRUE, 
+           general_title = "Notes.") %>% 
+  cat()
+```
+
+::: {.callout-tip}
+I used the [`emmeans`](https://cran.r-project.org/package=emmeans) 
+R package to get the estimated marginal means and the 
+[`knitr`](https://cran.r-project.org/package=knitr) and 
+[`kableExtra`](https://cran.r-project.org/package=kableExtra) R packages to 
+format @tbl-emm-Group and @tbl-emm-Group-difftest, plus the 
+[`ggplot2`](https://cran.r-project.org/package=ggplot2) R package to format 
+@fig-emm-Group. 
+:::
+
+# References
+::: {#refs}
+:::
+
+::: {.callout-tip} 
+**Quarto automated integrating formatted in-text citations and a formatted** 
+**reference list** because I added the following lines to the YAML header for 
+this script:
+
+```
+bibliography: ../references.bib
+csl: ../apa.csl
+```
+
+The first line tells Quarto that the citation data used to construct the 
+reference list entries above is in the `references.bib` file, while the second
+line tells Quarto to use the formatting rules in `apa.csl` when creating the 
+list. Those are the @APA-RN4003 rules. 
+
+Individual entries are added to the list by inserting
+[citations](https://quarto.org/docs/authoring/citations.html) into the 
+script that identify specific blocks of data in `references.bib`. For example, 
+inserting the cross-reference `@APA-RN4003` in the prior paragraph inserted an 
+item into the list, and the formatted in-text citation into the paragraph when 
+I rendered the document. 
+
+Quarto inserts the final reference list wherever it finds the following bit of 
+text, which I put under the References heading:
+
+```
+::: {#refs}
+:::
+```
+:::
+
+# Software Information
+This section shows information about the current software environment. 
+
+::: {.callout-tip}
+This is part of meeting the **documentation criterion** for reproducibility by 
+applying the **preservation, automation, and integration principles**: We are 
+automating the process of preserving a description of the software used when 
+rendering the document by integrating code that inserts that information
+below. This facilitates troubleshooting reproducibility issues if someone else 
+is unable to get the same results I did from the same code. Start by checking 
+whether they are using different versions of various packages. 
+::: 
+
+We used [R](https://www.r-project.org/) as our main computing environment and 
+[Quarto](https://quarto.org/) scripts to enhance reproducibility. We used 
+[RStudio](www.rstudio.org) as the editor to interface with R and Quarto. 
+
+- Software chain:
+  **qmd file > RStudio > Quarto > R > knitr > md file > Pandoc > HTML file**.
+- Source file: **`{r} paste0(params$SourceDir, params$SourceFile)`**
+- Output file: **`{r} paste0(params$SourceDir, "output/", params$LogFile)`**
+- [Quarto `{r} quarto_version()`](https://quarto.org/) runs `*.qmd` files through 
+  [R](https://www.r-project.org/) and [knitr](https://yihui.org/knitr/) to 
+  produce `*.md` markdown files.
+- [Pandoc `{r} rmarkdown::pandoc_version()`](https://pandoc.org) converts 
+  markdown files (`*.md`) to other formats, including LaTeX (`*.tex`) and HTML 
+  (`*.html`) among others.
+
+::: {.callout-tip}
+Following the **separation principle**, the source code for this report is 
+stored in one file, but the rendered output will be put in a different file in 
+another subfolder. 
+
+I used [inline R code](https://quarto.org/docs/computations/inline-code.html) 
+above to dynamically insert the filenames based on paramter values in the 
+source script's YAML header. The inline R code looks like this:
+
+```
+- Source file: **`{{r}} paste0(params$SourceDir, params$SourceFile)`**
+- Output file: **`{{r}} paste0(params$SourceDir, "output/", params$LogFile)`**
+```
+:::
+
+## Versions
+This document was generated using the following computational environment and 
+dependencies: 
+
+```{r}
+#| label: show-version
+
+# Get R and R package version numbers in use.
+session_info()
+```
+
+## Git Details
+The current Git commit details and status are:
+
+``` {r}
+#| label: git-details
+#| echo: true
+
+git_report()
+```
+
+This is useful because it tells us exactly which commit in the Git history 
+we would need to be using to make sure we are running the exact same code. 
+Sometimes another person is not using the most current code, or has changed the 
+code in some way since it was last committed.  
+
+::: {.callout-tip}
+Untracked files are files located in the repository that Git has not been told 
+to entirely ignore, but have also not been commited into the version history. 
+
+Unstaged changes to files indicate that some of the contents have been modified 
+since the last time the file was committed to Git. For a final production run 
+of a report, you want the Git output to not show any unstaged changes to key 
+files!
+::: 
