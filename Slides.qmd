@@ -1,0 +1,1072 @@
+---
+title: "Reproducible Research: Principles, Practices, and Tools for Generating Reproducible Statistical Analyses and Reports"
+subtitle: "CSTAT webinar series on Responsible and Ethical Conduct of Research, East Lansing, MI"
+author: "Steven J. Pierce"
+institute: "Center for Statistical Training and Consulting, Michigan State University"
+date: March 6, 2025
+title-slide-attributes: 
+  data-notes: 1 hr (45-50 min talk + 10-15 min Q & A) My name is Steven Pierce. 
+              My talk today focuses on how R and Quarto provide a foundation 
+              for generating reproducible statistical analyses and reports. 
+              My goal is promote reproducibility and encourage you to build your 
+              capacity and competency by adopting principles, practices, and 
+              tools for reproducible research. Hopefully, sharing my experience 
+              and insights will persuade you why that's beneficial, motivate you 
+              to do so, and accelerate your learning journey. My slides and 
+              example files are available from the link at the bottom of the 
+              screen. The slides have many links to resources built right in and 
+              are themselves a reproducible product. So jot down that link or my 
+              email address so you can get them later. For now, enjoy this 
+              guided tour. 
+csl: apa-numeric-superscript-brackets.csl
+bibliography: references.bib
+format: 
+  revealjs:
+    embed-resources: true
+    theme: [default, CSTAT_theme.scss]
+    controls: true
+    slide-number: c/t
+    show-notes: false
+    header-logo: graphics/Combomark-Horiz_Green-RGB.png
+    footer: <a href="https://github.com/sjpierce/CSTAT.RR2025">https://github.com/sjpierce/CSTAT.RR2025</a>
+    logo: graphics/CSTAT_5x5_Transparent.png
+    link-external-icon: true
+    link-external-newwindow: true
+filters:
+  - reveal-header
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra) # Functions for formatting nice tables. 
+```
+
+## Outline
+* What do you mean by reproducible? 
+* Why should we aim for reproducibility?
+* How do we achieve reproducibility?
+* Demonstration
+
+::: {.notes}
+I've organized this talk around answering three questions that you're probably
+already thinking about right now. They are: "What do you mean by reproducible?"
+"Why should we aim for reproducibility?", and "How do we achieve
+reproducibility?" After answering those questions, I'm going to do a 
+demonstration. 
+:::
+
+::: {style="text-align: right;"}
+# What do you mean by <br> reproducible?  {background-image="graphics/pexels-august-de-richelieu-4427508.jpg" background-size="contain" background-position="left" background-repeat="no-repeat"}
+
+Let's define some concepts.
+<br> <br> <br> <br> <br>
+:::
+
+::: {.notes}
+The first question is "What do you mean by reproducible?" Let's define some 
+concepts to set the stage for the rest of the talk. 
+:::
+
+## Reproducible Research (RR)
+... is achieved when investigators *share all the materials required to exactly 
+recreate the findings* so that others can verify them or conduct alternative 
+analyses.
+
+::: {.notes}
+Reproducible research is research for which the investigators have shared all
+the materials required to exactly recreate the findings so that others can
+verify them or conduct alternative analyses. Some of you may work in the private 
+sector rather than academia. This is still a worthwhile goal even if you work in 
+a business and are creating statistical reports that will not turn into academic 
+publications. That just means your audience may be smaller.
+:::
+
+## Statistical Results Can Be:
+
+:::: {.columns}
+
+::: {.column width="35%"}
+::: {.fragment}
+[Repeatable]{.bg}
+
+* Original analyst
+* Original data
+:::
+:::
+
+::: {.column width="35%"}
+::: {.fragment}
+[Reproducible]{.bg}
+
+* New analyst
+* Original data
+:::
+:::
+
+::: {.column width="30%"}
+::: {.fragment}
+[Replicable]{.bg}
+
+* New analyst
+* New data
+:::
+:::
+
+::::
+
+::: {.notes}
+Let's put reproducibility into a broader context. Statistical results can be
+classified into a few different categories. **>** They are repeatable when the
+original analyst can reliably obtain the same results from the original data.
+**>** They are reproducible if a new analyst can obtain the same result from the
+original data. **>** Finally, they are replicable if a new analyst can obtain
+the same result from a new set of data. How confident are you about where your
+work falls on this spectrum?
+:::
+
+## RR is a Product
+
+```{dot}
+//| fig-width: 9
+//| fig-height: 4
+digraph RRProduct {
+rankdir="TB";
+
+node [shape = "box", style= "filled", fontname="Lato", fillcolor = "#C3FFEC"]
+Quant [label = "Quantitative Methods"]
+Qual [label = "Qualitative Methods"]
+Mixed [label = "Mixed Methods"]
+RR [label = "Reproducible Research"]
+
+Quant -> Mixed -> RR
+Quant -> RR
+Qual -> Mixed
+Qual -> RR
+}
+```
+
+RR is a product of *how we work*, not which methods we use. 
+
+::: {.notes}
+Reproducible research is a product of the research process that’s presumably
+independent of whether we use quantitative, qualitative, or mixed methods. What
+matters is how we work and share the materials. I suspect it’s easier to apply 
+the principles to quantitative methods and those are my forte as a 
+statistician--and probably yours as R users--so I'll focus on that route to 
+reproducibility today.
+:::
+
+# Why aim for <br> reproducibility? {background-image="graphics/Woman_Raising_Hand.jpg" background-size="contain" background-position="right" background-repeat="no-repeat"}
+
+:::: {.columns}
+
+::: {.column width="45%"}
+Several forces are promoting and enabling the push toward reproducibility.
+:::
+
+::::
+
+::: {.notes}
+So, why should we aim for reproducibility? There are many reasons. I’ll just 
+touch on a few key forces that are promoting and enabling the push toward it.
+:::
+
+## Methods Matter!
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 2
+digraph Continuum {
+rankdir="LR";
+
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", fillcolor = "#C3FFEC"]
+Low [label = "Low"]
+High [label = "High"]
+
+edge [fontname="Lato", fontsize="40pt", arrowsize = 1.5]
+Low -> High [label = "Trustworthiness & Credibility", dir = "both", minlen = 9]
+}
+```
+
+::: {.fragment}
+[Irreproducible < Reproducible < Replicated]{.absolute left="15%" top="35%"}
+:::
+
+::: {.fragment}
+:::{.callout-important}
+Reproducibility is an attainable minimum standard for science [@Peng-RN3189].
+:::
+:::
+
+::: {.notes}
+Studies that use good scientific practices yield more trustworthy, credible 
+findings. **>**
+
+At the low end of this continuum, irreproducible findings rely on investigator
+reputation to establish credibility because key methodological details aren’t
+published and the findings can’t be independently verified. This limits our
+ability to judge their quality and provides a poor foundation for future
+replication studies.
+
+Reproducible findings can be independently verified from the original data. We
+can better judge study quality on its own merits instead of by investigator
+reputation. Furthermore, it provides methodological details that lay a solid
+foundation for future replications.
+
+Finally, replicated research has the highest level of credibility because
+independent investigators have replicated the findings with new studies,
+indicating that the probability of opportunistic biases is low and the findings
+generalize beyond the original sample. This dramatically increases
+trustworthiness of a finding. **>**
+
+Roger Peng has argued that RR is an attainable minimum standard for science
+(Peng et al., 2006). 
+:::
+
+## Funders Value RR {.smaller}
+[Data sharing and reproducibility initiatives]{style="font-size: 1.25em"}
+
+:::: {.columns}
+
+::: {.column width="15%"}
+
+![](graphics/NIH_Logo.png){fig-alt="NIH logo." width=75% height=75%}
+![](graphics/NSF_Logo.jpg){fig-alt="NSF logo."  width=75% height=75%}
+
+![](graphics/IES+logo.png){fig-alt="IES logo." width=125% height=125%}
+:::
+
+::: {.column width="85%"} 
+
+* [https://sharing.nih.gov/data-management-and-sharing-policy](https://sharing.nih.gov/data-management-and-sharing-policy)
+* [https://grants.nih.gov/policy/reproducibility/index.htm](https://grants.nih.gov/policy/reproducibility/index.htm)
+* [https://new.nsf.gov/funding/data-management-plan](https://new.nsf.gov/funding/data-management-plan)
+* [https://www.nsf.gov/pubs/2019/nsf19022/nsf19022.pdf](https://www.nsf.gov/pubs/2019/nsf19022/nsf19022.pdf)
+* [https://www.nsf.gov/attachments/134722/public/Reproducibility_NSFPlanforOMB_Dec31_2014.pdf](https://www.nsf.gov/attachments/134722/public/Reproducibility_NSFPlanforOMB_Dec31_2014.pdf)
+
+* [https://ies.ed.gov/blogs/research/post/companion-guidelines-on-replication-and-reproducibility-in-education-research](https://ies.ed.gov/blogs/research/post/companion-guidelines-on-replication-and-reproducibility-in-education-research)
+
+:::
+
+::::
+
+::: {.notes}
+There are plenty of signs that funders value reproducible research. For example,
+NIH and NSF have data sharing policies, so you must address data sharing in
+grant proposals. They’ve also launched reproducibility initiatives. NIH started
+by promoting selected aspects of reproducibility for preclinical studies, but
+now expects it in a wider range of studies. Other federal funders like NSF and
+IES have also published materials promoting reproducibility.
+:::
+
+## Emerging Scientific Norms
+* Open science: 
+    * [https://www.cos.io/open-science](https://www.cos.io/open-science) 
+    * [https://open.science.gov](https://open.science.gov)
+* Pre-registered methods [@Bosnjak-RN8375; @Decoster-RN3192; @Moore-RN3318]
+* Reporting guidelines [@Appelbaum-RN3691; @Moher-RN2216; @Schulz-RN2218; @von-Elm-RN3288]
+* Publishing raw data [@Hrynaszkiewicz-RN3087; @Hrynaszkiewicz-RN3088]
+* Journal & publisher policies [@Decoster-RN3192; @Hrynaszkiewicz-RN3087; @Hrynaszkiewicz-RN3088; @Laine-RN3186; @Peng-RN3187]
+* Institutional policies
+
+::: {.notes}
+There are emerging scientific norms aligned with reproducibility. These are
+evident in the open science movement, calls for pre registered methods/trials,
+reporting guidelines, calls to publish raw data, and policies adopted by various
+journals and publishers. They are also reflected in some institutional policies.
+:::
+
+## Publishing Technology
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 5
+digraph PubTech {
+rankdir="TB"; splines=false; nodesep = .6;
+
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+Au [label = "Author", shape = "egg"]
+Jo [label = "Journal"]
+Ar [label = "Archive"]
+
+subgraph cluster_0 {
+style="rounded,dashed"; penwidth = 3; color = "black";
+label = "Print\n Distribution"; labelloc=b;
+fontname="Lato"; fontsize="40pt"; fontcolor = "black";
+Pa [label = "Manuscript", shape = "note"]
+}
+
+subgraph cluster_1 {
+style="rounded,dashed"; penwidth = 3; color = "red"; margin = .3;
+label = "Online Distribution\nEasy, low cost, no page limits!"; labelloc=b;
+fontname="Lato"; fontsize="40pt"; fontcolor = "red";
+SF [label = "Manuscript &\nSupplemental\nFiles", shape = "note"]
+CD [label = "Codebooks,\nData, &\nSoftware", shape = "note"]
+}
+
+edge [fontname="Lato", fontsize="40pt", arrowsize=1.5]
+Jo -> Au [dir = "back"]
+Au -> Ar 
+Jo -> Pa 
+Jo -> SF
+Ar -> CD
+
+//Jo -> Ar [style = "invis", minlen = 6.5]
+
+rank = same; {Jo; Au; Ar;}
+}
+```
+
+::: {.notes}
+Modern publishing technology makes reproducible research easier. When we relied
+mostly on printed journals to distribute scientific papers, cost and page limits
+restricted the ability to do reproducible work. Now, online publishing means you
+can easily share supplemental files alongside your papers; or deposit data,
+codebooks and other documentation; software files like analysis scripts; and
+even raw output in data archives/repositories. This vastly reduces cost,
+eliminates page limits, and increases opportunity to meet reproducibility 
+standards.
+:::
+
+## Career Benefits of RR
+* Motivation to focus on quality
+* Become more efficient
+* Create more products
+* Easier to get published 
+* Get cited more often
+* Build your reputation
+
+::: {.notes}
+There are some real career benefits of striving to create reproducible research
+and evaluation products. For example, it motivates you to be more careful about
+avoiding errors, thereby increasing the quality of your work. It will make you
+more efficient and the process yields more products. It may be easier to get
+published--and to publish in better journals--and you might ultimately get cited
+more often as people either adopt your methods, use your data for new studies,
+or discuss your work as an exemplar of high quality science. That will all build
+your professional reputation.
+:::
+
+# How do we achieve reproducibility? {background-image="graphics/Hands_Raised.jpg" background-size="contain" background-position="bottom" background-repeat="no-repeat"}
+
+Understand the criteria, then apply principles, practices, & tools. 
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+
+::: {style="text-align: center;"}
+## Criteria for Reproducbility <br> [@Peng-RN3189] {background-image="graphics/Woman_Thinking.png" background-size="contain" background-position="left" background-repeat="no-repeat"}
+
+::: {.incremental}
+* Data
+* Methods
+* Documentation
+* Distribution
+:::
+
+::: {.notes}
+Reproducibility is a continuum, but there are some simple criteria that we can
+use to evaluate how reproducible a given project is. **>** The data criterion
+requires sharing your data because nobody can recreate your findings without
+them. **>** The methods criterion requires sharing your methods in sufficient
+detail, preferably through sharing the actual software code or scripts you used
+to get the results. **>** The documentation criterion requires sharing adequate
+documentation of your data set and software environment so others can understand
+what you had, what you used to analyze it, and what it really means. **>**  
+Finally, the distribution criterion requires using standard methods to 
+distribute all these materials.
+:::
+
+:::
+
+##  Materials Required to Recreate Findings
+
+```{r}
+#| label: tbl-materials-findings
+
+tibble(Materials = c("Manuals & procedures", "Instruments & scoring rules", 
+                     "Codebooks", "Methods applied", "Data mgt decisions", 
+                     "Data files", "Software & analysis scripts"),
+       Findings = c("Statistics", "Coefficients & p-values", 
+                    "Confidence intervals", "Effect sizes", 
+                    "Model fit indices", "Figures", "Tables")) %>% 
+  kable(., format = "html") %>% 
+  kable_material(lightable_options = c("striped"), html_font = "Lato")
+```
+
+::: {.notes}
+Let’s list some examples of the kinds of materials & findings we are discussing.
+This is just a sample of what could be encompassed by these two terms.
+:::
+
+## Principles for Achieving Reproducibility
+
+:::: {.columns}
+
+::: {.column width="50%"}
+* Collaboration
+* Organization
+* Automation
+:::
+
+::: {.column width="50%"}
+* Preservation
+* Integration
+* Separation
+:::
+
+::::
+
+::: {.notes}
+Understanding a few guiding principles helps you figure out how to enhance
+reproducibility. Thinking about reproducibility as *collaboration* encourages us
+to prepare and share materials that will make our work accessible to others.
+*Organization* simplifies communicating to others how to reproduce our work.
+*Automation* helps us achieve efficiency and accuracy because scripts can be
+faster and more reliable than manual processes. The *preservation* principle
+guides us to keep our raw data pristine and to keep a good audit trail. The
+*integration* principle suggests building documentation directly into data files,
+putting comments in code, and using code to directly insert statistical results
+into reports. The *separation* principle helps us manage complexity by splitting
+projects or tasks into pieces; for example separating data management from
+analysis, or keeping raw data separate from working data files used for specific
+analyses. Keep an eye out for instances of these principles in action throughout
+the rest of this talk.
+:::
+
+## Workflow Woes
+* Use GUI, menus, & dialog boxes to do tasks 
+* Manually updating data files 
+* Version control through saving to new file names 
+* Disorganized folders & files 
+* No audit trail 
+* Copy & paste output from stats software to word processor 
+* Fixing mistakes took lots of time 
+
+::: {.notes}
+Here are some common workflow woes that may sound uncomfortably familiar from
+your own experience. As a student, I was taught a manual workflow for doing data
+analysis and writing reports. We used the GUI, menus, and dialog boxes in SPSS
+to do data management and analysis. We updated data files manually. We created
+tons of files, saving to a new filename as changes accrued. That led to
+confusing proliferation of folders and files with little planned structure. It
+was hard to tell who had last edited various files and which versions to use.
+Who hasn't seen a project accumulate files like "Final Report", "Final Report2",
+"Final Report 11-01", "Final Final Report" and so on? We retyped or pasted
+results from SPSS output into Word documents then spent lots of time formatting
+them. If we made a mistake, it could takes hours or even days to re-do things.
+Over time I learned some strategies to improve that workflow, such as using SPSS
+syntax files to automate tasks, adding comments in my code, adopting file naming
+conventions, and so on. Switching to R instead of SPSS brought real benefits,
+but did not solve all the workflow issues on its own. For example, running an R 
+script still left me manually moving results into Word documents. It didn't 
+solve the mess of files, or the version control issues. Part of the problem was
+that the software tools weren't integrated and lacked support for better
+workflows. Technology has vastly improved since my student days, but many people
+still use manual workflows like those I just described. They don't know what is
+possible now. Given what I've learned in recent years, if asked to resume using
+those older tools and workflows, I'd probably break out my favorite Spock quote.
+:::
+
+## Spock {background-image="graphics/Spock.jpg" background-position="top" }
+
+::: {.absolute left="0%" top="65%" style="font-size:.8em; padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px;"}
+
+"Captain, you're asking me to work with equipment which is hardly very far 
+ahead of stone knives and bearskins."  
+  
+*Star Trek (1966) - S01E28 The City on the Edge of Forever*
+:::
+
+::: {.notes}
+"Captain, you're asking me to work with equipment which is hardly very far ahead
+of stone knives and bearskins."
+:::
+
+## Free, Open Source Software Tools for Reproducible Research {background-image="graphics/Keyboard_Typing.jpg"}
+
+:::: {style="padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px;"}
+* [R](https://www.r-project.org/) [@R-Devel-Core-RN8182], for statistical 
+  computing
+* [RStudio Desktop](https://posit.co/download/rstudio-desktop/) 
+  [@RStudio-Team-RN8351], an editor
+* [Quarto](https://quarto.org) [@Allaire-RN8427], for dynamic documents 
+* [TinyTeX](https://yihui.org/tinytex/), for nice PDF output
+* [Git](https://git-scm.com/) [@Torvalds-RN3929], for version control
+* [GitHub.com](https://github.com), for sharing & collaborating on code
+
+::::
+
+::: {.notes}
+Fortunately, there's a better way to do analyses and write reports. It depends
+on additional open-source software and learning new workflows. These are my
+favorite tools now. As you all know, R is a fantastic tool for managing and
+analyzing data and creating figures. RStudio Desktop is an excellent editor for
+working with R that also simplifies using Quarto, TinyTeX, Git, and GitHub.
+These other tools may be less familiar to you than R and RStudio. Quarto
+supports creating dynamic documents that render to a variety of output formats
+(HTML, PDF, Word, PowerPoint, etc.), TinyTex helps Quarto produce nice PDF
+output, while Git and GitHub together support version control, collaboration,
+and sharing materials. Collectively, they comprise an elegant, integrated set of
+tools for doing reproducible analyses and reports.
+:::
+
+## Dynamic Documents Via Quarto + R
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 5
+digraph DynDoc {
+rankdir="LR";
+compound=true;
+
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+Data [label = "Study_Data.csv\n(Raw Data File)"]
+Quarto [label = "Report.qmd\n(Quarto Script\nw/ R code)"]
+BibTeX [label = "references.bib\n(BibTeX Data File)"]
+CSL [label = "apa.csl\n(Citation Style\nLanguage File)"]
+Report [label = "Report.pdf\n(Formatted\nOutput)"]
+
+edge [fontname="Lato", fontsize="30pt", arrowsize = 1.5]
+Data -> Quarto [label = "Read by"]
+BibTeX -> Quarto [label = "Cited in"]
+CSL -> Quarto [label = "Used by"] 
+Quarto -> Report [label = "Render"] 
+}
+```
+
+::: {.notes}
+Dynamic documents are a crucial technology for reproducibility. They implement
+the concept of literate programming, where one embeds code directly in a
+document such as a report, interleaving it with narrative text, headings, and
+in-text citations. When you render dynamic documents, the code is executed and
+the results are inserted into the output. That includes statistics computed from
+the data, figures, tables, formatted equations, fully-formatted reference
+sections, and more. This diagram shows the files involved for a simple example.
+The idea is that rendering your report script produces an output such as a PDF
+file that is ready for delivery to your client.
+
+Several principles are in action here: Separation of data from code, integration
+of R code into the Quarto script, where it automates data management and
+analyses. Quarto automates inserting results into the report. The BibTeX file
+contains data about references you cite in the report, while the CSL file tells
+Quarto how to format the citations and the reference list. I'm using similar
+file names to stay organized: they show which script creates the report. Saving
+all the files follows the preservation principle. One can rapidly reproduce the
+report by re-rendering the script, or fix an error in the script or the data 
+then render again to automate updating the report.
+:::
+
+## A Research Compendium ... {background-image="graphics/pexels-anete-lusina-4792285.jpg"}
+
+:::: {style="padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px;"}
+organizes digital files so others can review or use them to 
+reproduce results, or do new analyses. [@Marwick-RN3899] It should: 
+
+::: {.incremental}
+* Use prevailing conventions to organize the project
+* Separate data, method, & output but show how they are related
+* Specify the software used in the original analysis
+:::
+
+::::
+
+::: {.notes}
+Dynamic documents are only part of the solution. Most projects require more than
+couple files, so organizing your materials into a research compendium is useful.
+A compendium is a structured folder containing all your digital files. **>** An
+effective one should use prevailing conventions to organize the project; **>**
+keep data, method, and output separate even while revealing how they are
+related; and **>** tell users what software was used in the original analysis.
+You can facilitate collaboration by thoughtfully setting up a compendium with 
+attention to applying the organization, separation, and integration principles.
+:::
+
+## R Packages are ... {background-image="graphics/folder-146940_1920.png"}
+folders of digital files designed for sharing code & help documentation. 
+[@Wickham-RN3898] 
+
+* Organize files into a conventional structure 
+* Can contain data, meta-data, & other documentation 
+* Can contain dynamic documents & rendered output 
+
+::: {.fragment}
+:::{.callout-tip}
+Use an R package for a research compendium! [@Marwick-RN3899] 
+:::
+:::
+
+::: {.notes}
+R packages are normally used to share code & associated help files so other
+people can use custom software. They are just folders of digital files organized
+into a conventional structure; they can contain data, meta-data, and
+documentation; and can even contain dynamic documents and rendered output. **>**
+So, Marwick and colleagues suggest using an R package as your research
+compendium! The conventional structure guides you to organize your files into
+specific subfolders and separate certain kinds of files from each other. It
+suggests specific kinds of documentation to include, like a README file that
+introduces new users to your work.
+:::
+
+## RStudio Projects are ... {background-image="graphics/folder-146940_1920.png"}
+folders of files that:
+
+* Keep files for an analysis project together
+* Can have subfolders for organizing files
+* Serve as R working directories w/ workspace & history
+* Store settings in an RStudio project file (`*.Rproj`)
+
+::: {.fragment}
+:::{.callout-tip}
+Turn your compendium into an [RStudio  project](https://docs.posit.co/ide/user/ide/guide/code/projects.html)! 
+:::
+:::
+
+::: {.notes}
+RStudio facilitates staying organized by allowing you to create projects, which
+are just folders where you can keep all the files for a specific analysis,
+report--or even a collection of related reports--together and use subfolders as
+needed. They also set the default working directory for R, complete with R
+workspace and history. They store project-specific settings in a file named
+after the folder itself. So if your project is a folder called `MyReport`, its
+project file would be called `MyReport.Rproj`. You can use that file to open the
+entire collection of files all at once. **>** So, turn your compendium into an
+RStudio project.
+:::
+
+## Git Repositories are ... {background-image="graphics/folder-146940_1920.png"}
+folders of files tracked by Git for version control. [@Bryan-RN3900; @Chacon-RN3480; @Torvalds-RN3929] 
+
+* Preserve a history of changes to each tracked file
+* Allow recovering a file's prior state from the history 
+* Can be local or remote (hosted on a server) 
+* Can be private or public 
+
+::: {.fragment}
+:::{.callout-tip}
+Put your research compendium in a Git repository!
+:::
+:::
+
+::: {.notes}
+Git is software for doing version control on code and other files stored in
+repositories, which are just--you guessed it--digital folders. You can choose
+which files to track, then log all committed changes to them, when they were
+made, who made them, and why. That preserves a fantastic audit trail. You can
+recover the exact state of a file as it existed at any commit in the history.
+Repositories can be either private or public. I usually keep a repository
+private until the corresponding paper has been published, then make it public to
+enhance reproducibility. Putting your compendium in a Git repository both
+follows the principles I've highlighted and solves some of those worklflow woes
+I described earlier. For example, you can stop using long, confusing filenames
+as a crude form of version control. Give each file a simple name that stays
+constant then let Git track how it changes over time. Jenny Bryan's paper on
+using proper version control persuaded me to start using Git. I have not
+regretted it! **>** So, put your compendium in a Git repository!
+:::
+
+## GitHub
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 5
+digraph GitHub {
+rankdir="TB"; nodesep = .25; splines = "ortho";
+
+subgraph cluster_0 {
+style="rounded,dashed"; penwidth = 3; color = "black";
+label = "GitHub Server"; labelloc=t;
+fontname="Lato"; fontsize="40pt"; fontcolor = "black";
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+RR [label = "OurProject\n(Remote Main Repository)"]
+}
+
+node [style = "invis"]
+Hidden
+
+subgraph cluster_1 {
+style="rounded,dashed"; penwidth = 3; color = "black";
+label = "Computer 1"; labelloc=b;
+fontname="Lato"; fontsize="40pt"; fontcolor = "black";
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+LR1 [label = "OurProject\n(Local Repository)"]
+}
+
+subgraph cluster_2 {
+style="rounded,dashed"; penwidth = 3; color = "black";
+label = "Computer 2"; labelloc=b;
+fontname="Lato"; fontsize="40pt"; fontcolor = "black";
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+LR2 [label = "OurProject\n(Local Repository)"]
+}
+
+edge [fontname="Lato", fontsize="30pt", arrowsize=1.5]
+RR:s -> Hidden:n [style = "invis"]
+Hidden:w -> LR1:ne [style = "invis"]
+Hidden:e -> LR2:nw [style = "invis"]
+RR -> LR1 [headlabel = "Clone/\rPull\r", labeldistance = 6, labelangle = 45]
+RR -> LR1:ne [taillabel = "Push\l", dir = back, labeldistance = 5, labelangle = 45]
+RR -> LR2:nw [taillabel = "Push\r", dir = back, labeldistance = 5, labelangle = -45]
+RR -> LR2 [headlabel = "Clone/\lPull\l", labeldistance = 6, labelangle = -45]
+}
+```
+
+::: {.notes}
+GitHub solves other workflow problems. It is an online server that hosts Git
+repositories, allowing multiple people to clone copies from the remote server to
+their own computers and synchronize their local copies with the main one on
+GitHub. This facilitates collaboration because each person can independently
+edit files in their own local copy, pull the recent changes others have made
+down from GitHub, and push their own changes back up to the main repository. Git
+will detect conflicting changes and force a user to resolve them and commit the
+result. Using a private GitHub repository while working on the project allows
+you collaborate with teammates as you develop a report. Later, you can make the
+repository public so that people outside your team can access reproducibility
+materials.
+:::
+
+## Quarto Projects are ... {background-image="graphics/folder-146940_1920.png"}
+folders of files that allow:
+
+* Rendering some or all dynamic documents 
+* Sharing a configuration file across documents
+* Redirecting output to another folder
+* Freezing rendered output unless the code has changed
+
+::: {.fragment}
+:::{.callout-tip}
+Turn a subfolder of your compendium into a [Quarto project](https://quarto.org/docs/projects/quarto-projects.html)! 
+:::
+:::
+
+::: {.notes}
+Quarto also has software support for a project-based workflow. A Quarto project
+is just a folder of files that allows you to easily render some or all the
+dynamic documents it contains, use a configuration file to share settings across
+documents, redirect output to another folder, and the option to freeze rendered
+output unless the code that creates it has changed.  **>** So, I suggest turning
+a subfolder in your compendium into a Quarto project.
+:::
+
+## Example Folder Structure 
+
+```
+MyStudy/            [Compendium, Git repository, R package, RStudio project]
+  - .git/           [Hidden folder, holds Git tracking database]
+  - .Rproj.user/    [Hidden folder, holds RStudio temporary files]
+  - data/           [Holds R data files created by scripts]
+  - man/            [Holds R help files for package & custom functions]
+  - R/              [Holds R scripts w/ custom functions]
+  - scripts/        [Quarto project, holds dynamic documents]  
+    - extdata/      [Holds external data files to be imported]
+    - output/       [Holds rendered output]
+  - .gitignore      [Tells Git what to omit from tracking]
+  - DESCRIPTION     [R package meta-data]
+  - MyProject.Rproj [RStudio project file & settings]
+  - NEWS.md         [News for users re: changes to package]
+  - README.Rmd      [Dynamic document, creates README.md]
+  - README.md       [Rendered output, R package documentation]
+```
+
+::: {.notes}
+Suppose I've got a project named MyStudy. Here's what its folder structure might
+look like. The `MyStudy/` folder is a research compendium that is also a Git
+repository, an R package, and an RStudio project. It is organized with several
+subfolders that help separate R data files from external data in other software
+formats that must be imported before use. It also separates data from code for
+either custom functions (the R subfolder) or for dynamic documents that are in a
+scripts subfolder that is also a Quarto project. Much of this structure is
+driven by R package conventions. Notice that output is also separated from the
+code by tucking it in its own subfolder. There are a handful of files for
+storing package meta-data and documentation, controlling what Git will track and
+what it will ignore. This basic structure has worked very well for me across 
+several projects.
+:::
+
+## Collaboration Stakeholders {style="text-align: right" background-image="graphics/pexels-fauxels-3184634.jpg" background-position="top" }
+
+:::: {.absolute left="45%" top="40%" style="padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px; text-align: left;"}
+
+* Your future self
+* Your team
+* Peer reviewers
+* Your audience
+
+::::
+
+::: {.notes}
+Plan your work as a collaborative effort with multiple stakeholders. Knowing you
+will share files with several kinds of people orients you to the need to
+communicate what you are doing, how the materials are organized, and how they
+can be used to reproduce results. It motivates you to make things clear and
+include good documentation. Notice here that I include your future self as a 
+stakeholder. To paraphrase a former colleague "your worst collaborator is often 
+the you from 6 months ago who skipped writing down some key details because you 
+foolishly assumed you'd remember them later."
+
+*Time elapsed should be ~22-24 min by this point.*
+:::
+
+## Organization Tips
+
+* Add documentation!
+* Use file naming conventions to links scripts & output
+* Use data flow diagrams to show relations between files
+* Use a primary rendering script to run other scripts
+
+::: {.notes}
+One of the most crucial organization tips I can offer you is to add
+documentation to your compendium. That usually includes some form of a README
+file, but it may also include one or more vignettes, codebooks, or other
+documents that help a new person understand and use the contents of your
+compendium. Another tip is to use file naming conventions that help readers see
+how scripts link to output files. You can use data flow diagrams to show the
+relationships between files. Finally, consider creating a primary rendering
+script that automates running all your other scripts in the correct order.
+:::
+
+## Example Data Flow Diagram
+
+```{dot}
+//| fig-width: 10
+//| fig-height: 5
+digraph Flow {
+rankdir="LR";
+compound=true;
+
+node [shape = "box", style= "filled", fontname="Lato", fontsize="40pt", 
+      fillcolor = "#C3FFEC", margin = .25]
+RenderS [label = "Render.qmd"]
+RenderO [label = "Render.html"]
+CDS [label = "Cleaning.qmd"]
+CDO [label = "Cleaning.html"]
+RData [label = "Raw_Data.csv"]
+CData [label = "Clean_Data.RData"]
+ReportS [label = "Report.qmd"]
+ReportO [label = "Report.pdf"]
+SlidesS [label = "Slides.qmd"]
+SlidesO [label = "Slides.ppt"]
+
+edge [fontname="Lato", fontsize="30pt", arrowsize = 1.5]
+RenderS -> RenderO [label = "Creates"]
+RenderS -> CDS [label = "Runs"]
+RData -> CDS [Label = "Read by"]
+CDS -> CDO [label = "Creates"]
+CDS -> CData [label = "Creates"]
+CData -> ReportS [label = "Read by"] 
+CData -> SlidesS [label = "Read by"] 
+RenderS -> ReportS [label = "Runs"]
+ReportS -> ReportO [label = "Creates"] 
+RenderS -> SlidesS [label = "Runs"]
+SlidesS -> SlidesO [label = "Creates"] 
+
+//{rank = same; RData; CDS; }
+{rank = same; ReportS; SlidesS;}
+//{rank = same; RenderO; IDO; Report1O; Report2O;}
+}
+```
+
+::: {.notes}
+Here's an example data flow diagram that illustrates several of those tips.
+Boxes represent files and arrows show which files are inputs to other files or
+outputs created by them. Scripts and their outputs have the same filename except
+for the extension that denotes file type. Notice how the Render script actually
+runs three other scripts, one for data cleaning, plus one that creates some
+slides, and another that creates a report. This diagram makes it easy to see how
+10 files are related at a glance.
+:::
+
+## Automation Tips {background-image="graphics/robot-6654025_1280.png" background-size="40%" background-position="right" background-repeat="no-repeat"}
+
+* Use scripts instead of GUIs
+* Write [self-contained scripts](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+* Render entire script frequently
+* Computers are patient
+* Computers are idiots
+
+::: {.notes}
+For automation, I suggest using scripts to do as much of the work as possible.
+Manual steps reduce the efficiency and reproducibility of your work. They are
+more error-prone than well-written code. Each script should start from a clean R
+session--an empty workspace--and use code to load the data it needs to run. You
+also want to render each script in its entirety frequently as you develop it.
+That's the best way make sure the whole thing works correctly.
+
+Leverage the inhuman patience of computers. They're great at long, repetitive
+tasks that bore or fatigue humans into making errors. If something is
+mind-numbingly tedious, write code to get the computer to do it for you.
+Remember: computers are also literal-minded idiots. They do what you tell them
+to do, whether or not that makes sense or is what you intended. Put your time
+into giving them the right instructions and checking that you got the right
+results.
+:::
+
+## Preservation Tips
+What should you preserve?
+
+* Data and meta-data
+* Methodology decisions & rationales
+* Scripts (data cleaning, management, & analysis)
+* Version histories of data, code, & output
+* Software environment & versions used
+
+::: {.notes}
+In terms of preservation, go back to the criteria for reproducibility. Your
+compendium must either include the data and metadata, or tell people how to get
+them from some accessible source. Document methodology decisions and rationales
+in your scripts and keep all the code that actually produces your output.
+Keeping version histories of repository contents is a major bonus, but not
+strictly required. Use a scripts to automate recording information about the
+software environment to meet the documentation criterion for reproducibility.
+:::
+
+## Integration Tips  {background-image="graphics/pexels-diva-plavalaguna-6147357.jpg"}
+
+:::: {style="padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px;"}
+
+* Attach meta-data directly to data 
+* Use Quarto to integrate narrative text & code 
+* Add R functions & help files to your compendium
+* Include citations & reference lists 
+  
+::::
+
+::: {.notes}
+Here are some quick integration tips. Attaching metadata such as variable and
+value labels directly to your data is an obvious way to make that metadata
+available to users of your compendium. Quarto scripts allow you to integrate
+narrative text with the code used to produce results. If you need custom R
+functions, add them to your compendium (which is also an R package) and include
+help files that explain how to use them. Finally, take advantage of Quarto's
+support for citing sources and building dynamic reference lists.
+:::
+
+## Separation Tips
+
+```{r}
+#| label: tbl-separation
+
+tibble(This = c("Raw Data", "Code", "Code", "Data Management", "Draft Outputs", 
+                "Current Files"),
+       From = c(rep("|", times = 6)),
+       That = c("Cleaned Data", "Data", "Output", "Data Analysis", 
+                "Final Deliverables", "Version History")) %>% 
+  kable(., format = "html", align = "rcl", 
+        col.names = c("Separate This", " ", "From That")) %>% 
+  kable_material(full_width = FALSE, lightable_options = c("striped"), 
+                 html_font = "Lato")
+```
+
+::: {.notes}
+This table lists tips on applying the separation principle. I've mentioned the
+first three rows already, so here I want to highlight the last three. In larger
+projects, sometimes it is useful to split processes into multiple scripts. An
+obvious split is between data management and data analysis scripts. Another
+thing I like to do is separate my draft outputs from the versions of final
+deliverables sent to clients or stakeholders by date-stamping the filenames for
+final deliverables. Finally, Git simplifies separating the current versions of
+files from their version histories.
+:::
+
+## Quarto Scripts: Anatomy
+
+* Plain text files with names ending in `.qmd`
+* Use [markdown syntax](https://quarto.org/docs/authoring/markdown-basics.html) 
+  to format rendered output
+* YAML header contains metadata, options, & parameters
+* Body contains the main content 
+
+::: {.notes}
+I will show you an some example files in a minute but it helps to understand 
+a little about the anatomy of a Quarto script first. It is just a plain text 
+file with a name that ends in `.qmd`. It uses a simple markdown syntax to format
+the output it will render. The top of the file is the YAML header, which
+contains document-level metadata, options, and parameters. The body of the file
+contains headings, narrative text, code, citations, links, and cross-references.
+:::
+
+## Quarto Scripts: Code {background-image="graphics/pexels-goumbik-574069.jpg"}
+
+:::: {style="padding: 0.25em .5em; background-color: rgba(255, 255, 255, .5); backdrop-filter: blur(5px); box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); border-radius: 20px;"}
+
+* [Inline code](https://quarto.org/docs/computations/inline-code.html) lets you 
+  insert dynamic text or numbers into sentences. 
+* [Code chunks](https://quarto.org/docs/computations/r.html) allow you to do
+  larger computations and insert more complex results. 
+  
+::::
+
+::: {.notes}
+You can put two types of code into a Quarto script. The simplest kind is called
+*inline code*, which is designed to allow short pieces of code that insert
+computed text or numbers--such as a group mean--right in the middle of a
+sentence. Inline code makes your narrative text dynamic. *Code chunks* allow you
+to do more substantial computing, like reading in or managing data, fitting
+models, or creating and then inserting more complex pieces of output like tables
+and figures.
+:::
+
+## MyStudy Demonstration Files
+Let's take a look at actual dynamic documents!
+
+* `scripts/MyStudy_Report.qmd`
+* `scripts/output/MyStudy_Report.html`
+
+::: {.notes}
+*Elapsed time should be ~30-32 min, use next 10-15 min to show code and output*
+*Set RStudio Appearance for console font to 14pt!* 
+Now I'm going to show you an actual Quarto script and the output it produces. 
+Both files are available online along with my slides, so you can examine and 
+compare them in detail later. For now, enjoy this guided tour. 
+
+* Script
+    * YAML header
+    * Headings
+    * Callout blocks
+    * In-text citation
+    * Formatting text: bold, italics, type-writer font
+    * Inline code
+    * Code chunk
+    * Table
+* Output
+    * Title block content
+    * Table of contents & numbered headings
+    * In-text citation
+    * Callout blocks
+    * Show vs. hide code chunks
+    * Table 1 numbering & appearance
+    * Table 2 raw vs formatted output 
+    * Figure 1
+    * Reference list
+    * Software information
+    
+:::
+
+## Bonus Resources
+
+* R for non-programmers: A guide for social scientists [@Dauber-RN8674]
+* What they forgot to teach you about R [@Bryan-RN3998]
+* [RStudio IDE user guide](https://docs.posit.co/ide/user/)
+* [Using RStudio projects](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects)
+* R packages: Organize, test, document, and share your code [@Wickham-RN3898]
+* Happy Git and GitHub for the useR [@Bryan-RN3908]
+* [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
+
+## References {.scrollable}
+
+::: {#refs}
+:::
+
+# Discussion Time
+Thank you for attending!
+
+::: {.notes}
+*Time should be ~50 min, leaving 10 min for questions.*
+:::
