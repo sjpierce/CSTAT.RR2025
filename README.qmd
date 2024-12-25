@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 This repository holds materials for one of my professional presentations 
-[@Pierce-RN8692].  Its primary purpose is for me to use version control tools 
+[@Pierce-RN8692]. Its primary purpose is for me to use version control tools 
 while developing my slides, but its secondary purposes include distributing the 
 slides and example files to my audience and demonstrating how to use Quarto to 
 create slides. 
