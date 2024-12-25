@@ -1,0 +1,52 @@
+color:
+  palette:
+    # MSU brand colors from https://brand.msu.edu/visual/color-palette
+    PureWhite: "#ffffff"
+    Black: "#000000"
+    SpartanGreen: "#18453B"
+    KellyGreen: "#008208"
+    LimeGreen: "#7BBD00"
+    ExcellenceGreen: "#0B9A6D"
+    PaleExcellenceGreen: "#C3FFEC"
+    RefreshGreen: "#008934"
+    # Other colors
+    blue: "#00008b"
+    yellow: "#F4BA02"
+  background: PureWhite
+  foreground: Black
+  primary: blue
+
+logo:
+  medium: graphics/CSTAT_5x5_Transparent.png
+
+typography:
+  # MSU Official Fonts (https://brand.msu.edu/visual/typography)
+  #   Sans Serif: Metropolis (body, headings, subheadings)
+  #               Liberator (headings only)
+  #   Serif: Garamond
+  #          Times New Roman
+  # MSU official substitutions are:
+  #   Sans Serif: Arial or Helvetica
+  #   Serif: Times New Roman
+  # Google Font Substititions for MSU Official Fonts
+  #   Metropolis -> Roboto, Lato
+  #   Liberator -> Oswald, Roboto Condensed, Impact
+  #   Garamond -> EB Garamond, Cormorant Garamond
+  #   Arial -> Roboto, Arimo, Lato, Open Sans
+  #   Helvetica -> Open Sans, Questrial,
+  #   Times New Roman -> Tinos
+
+  fonts:
+    - family: Oswald # Substitute for Liberator
+      source: google
+    - family: Lato   # Substitutes for Metropolis
+      source: google
+
+  base:
+    family: Lato
+  headings:
+    family: Oswald
+    color: SpartanGreen
+
+  link:
+    decoration: none
