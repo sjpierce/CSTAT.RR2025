@@ -23,13 +23,12 @@ bibliography: references.bib
 format: 
   revealjs:
     embed-resources: true
-    theme: [default, CSTAT_theme.scss]
+    theme: [default, brand, CSTAT_theme.scss]
     controls: true
     slide-number: c/t
     show-notes: false
     header-logo: graphics/Combomark-Horiz_Green-RGB.png
     footer: <a href="https://github.com/sjpierce/CSTAT.RR2025">https://github.com/sjpierce/CSTAT.RR2025</a>
-    logo: graphics/CSTAT_5x5_Transparent.png
     link-external-icon: true
     link-external-newwindow: true
 filters:
