@@ -1,46 +1,23 @@
 /*-- scss:defaults --*/
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
-@import url(https://fonts.googleapis.com/css?family=Figtree:400,900);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
-
-// MSU brand colors from https://brand.msu.edu/visual/color-palette
-$theme-PureWhite:#ffffff;
-$theme-Black:#000000;
-$theme-SpartanGreen: #18453B;
-$theme-KellyGreen: #008208;
-$theme-LimeGreen: #7BBD00;
-$theme-ExcellenceGreen: #0B9A6D;
-$theme-PaleExcellenceGreen: #C3FFEC;
-$theme-RefreshGreen: #008934;
-
-// Other colors
-$theme-blue: #00008b;
-$theme-yellow: #F4BA02;
-
 // fonts
 $font-family-sans-serif: Lato, sans-serif !default;
 
 // colors
-$body-bg: $theme-PureWhite !default;
-$body-color: $theme-Black !default;
-$link-color: $theme-blue !default;
 $selection-bg: rgba(0, 0, 0, 0.99);
 
 // headings
-$presentation-heading-font: "Figtree", sans-serif !default;
 $presentation-h1-font-size: 1.5em !default;
 $presentation-h2-font-size: 1.25em !default;
 $presentation-h3-font-size: 1.1em !default;
 $presentation-h4-font-size: 1em !default;
-$presentation-heading-color: $theme-SpartanGreen !default;
 
 /*-- scss:rules --*/
 
 // Formatting classes
 
 .bg {
-  background-color: var(--col, $theme-PaleExcellenceGreen);
+  background-color: var(--col, $brand-PaleExcellenceGreen);
   padding: 0.1em;
   border-radius: 5px;
   display: inline-block;
