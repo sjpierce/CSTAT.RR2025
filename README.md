@@ -77,6 +77,8 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     know what you are doing! This folder is not tracked by Git.
   - `.Rproj.user/`: This hidden folder is used by Rstudio. Leave it
     alone!
+  - `_brand.yml`: This file contains color palette, font, and logo
+    settings for CSTAT branding.
   - `_extensions/`: This folder contains files for Quarto extensions
     used by my presentation slides.
   - `data/`: This folder is intended to hold R Data files (`*.RData`).
