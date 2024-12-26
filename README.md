@@ -94,6 +94,9 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
       you know what you are doing! This folder is not tracked by Git.
   - `output/`: This folder holds rendered output from scripts in this
     Quarto project.
+    - `graphics/`: This subfolder is created when you render the slides
+      or other scripts. It holds temporary copies of graphics files used
+      to create the HTML output files. You can ignore or delete it.
     - `Create_MyStudy_Data.html`: This is created by rendering
       `scripts/Create_MyStudy_Data.qmd`.
     - `MyStudy_Report.html`: This is created by rendering
