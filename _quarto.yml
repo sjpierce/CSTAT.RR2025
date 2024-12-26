@@ -1,2 +1,3 @@
 project:
   title: "CSTAT.RR2025"
+  output-dir: "output"
