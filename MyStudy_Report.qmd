@@ -1,5 +1,8 @@
 ---
-title: "MyStudy Report"
+title: | 
+  ![](graphics/logo_MSU_CSTAT.png){width=3in style="margin-right: 55px;" fig-alt="Spartan helmet with MSU/CSTAT wordmark."}  
+  ![](graphics/CSTAT_5x5_Transparent.png){width=1.5in align="right" fig-alt="CSTAT logo."} \
+  MyStudy Report
 subtitle: "An Example Dynamic Document"
 author: 
   - name: Steven J. Pierce
