@@ -92,27 +92,13 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     - `.quarto/`: This hidden folder may be created by Quarto to hold
       temporary files. Do not edit or delete any of these files unless
       you know what you are doing! This folder is not tracked by Git.
-    - `output/`: This folder holds rendered output from scripts in its
-      parent folder.
-      - `Create_MyStudy_Data.html`: This is created by rendering
-        `scripts/Create_MyStudy_Data.qmd`.
-      - `MyStudy_Report.html`: This is created by rendering
-        `scripts/MyStudy_Report.qmd`.
-    - `.gitignore`: This file tells Git what files to ignore and omit
-      from synchronizing with the main repository on GitHub.
-    - `_quarto.yml`: This is a Quarto metadata file containing
-      folder-level YAML code that will be inherited by Quarto scripts in
-      this folder or its subfolders.
-    - `Create_MyStudy_Data.qmd`: This Quarto script creates the example
-      file `data/MyStudy.RData`. The output from rendering the script is
-      stored in `scripts/output/`.
-    - `Delete_nul_file.bat`: This Windows batch files can be useful if
-      rendering problems leave behind a file called `nul` that is
-      otherwise hard to delete on Windows.
-    - `MyStudy_Report.qmd`: This Quarto script is an example of a
-      dynamic document used in the live demonstration during my
-      presentation. It reads in example data, then analyzes it. The
-      rendered output is stored in `scripts/output/`.
+  - `output/`: This folder holds rendered output from scripts in this
+    Quarto project.
+    - `Create_MyStudy_Data.html`: This is created by rendering
+      `scripts/Create_MyStudy_Data.qmd`.
+    - `MyStudy_Report.html`: This is created by rendering
+      `scripts/MyStudy_Report.qmd`.
+    - `Slides.html`: These are the slides used during the presentation.
   - `.gitignore`: This file tells Git what files to ignore and omit from
     synchronizing with the main repository on GitHub.
   - `_quarto.yml`: This is a Quarto metadata file containing
@@ -133,10 +119,17 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     numeric superscripts in square brackets for in-text citations and
     put the reference list in the order the citations were used. It is
     used by Quarto to format reference sections.
+  - `Create_MyStudy_Data.qmd`: This Quarto script creates the example
+    file `data/MyStudy.RData`. The output from rendering the script is
+    stored `output/Create_MyStudy_Data.html`.
   - `CSTAT_theme.css`: This is custom style sheet file to provide color
     scheme, fonts, etc. for my slides.  
   - `CSTAT.RR2025.Rproj`: This is an RStudio project file. It contains
     some settings for working with the project in that software.
+  - `MyStudy_Report.qmd`: This Quarto script is an example dynamic
+    document used in the live demonstration during my presentation. It
+    reads in example data, then analyzes it. The rendered output is
+    stored in `output/MyStudy_Report.html`.
   - `README.md`: This file is obtained by knitting the `README.qmd` file
     and is used by GitHub to display information about the repository.
     Do not edit it manually: just re-knit `README.qmd` to update it. In
@@ -148,9 +141,9 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
   - `references.bib`: This is a BibTeX file containing citation data for
     papers, software, etc. that we want to cite anywhere in our Quarto
     scripts throughout the package.
-  - `Slides.html`: This output file contains the actual slides I used to
-    give the presentation.
-  - `Slides.qmd`: Rendering this Quarto script creates my HTML slides.
+  - `Slides.qmd`: This is the Quarto script that creates the slides.
+    Rendering it creates my final HTML slides in the file
+    `output/Slides.html`.
 
 ## Rendering The Scripts
 
