@@ -1,0 +1,198 @@
+---
+title: "Create Example Data for Reproducible Research Presentation"
+author: 
+  - name: Steven J. Pierce
+    orcid: 0000-0002-0679-3019
+    email: pierces1@msu.edu
+    affiliations: 
+      - name: Michigan State University, Center for Statistical Training and Consulting
+bibliography: references.bib
+csl: apa.csl
+date: now
+date-modified: last-modified
+date-format: YYYY-MM-DD HH:mm:ss z
+params:
+  SourceDir: ""
+  SourceFile: "Create_MyStudy_Data.qmd"
+  LogFile: "Create_MyStudy_Data.html"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    number-depth: 3
+    code-fold: show
+    code-tools: true
+    code-line-numbers: false
+    embed-resources: true 
+    anchor-sections: true
+execute:
+  eval: true
+  echo: fenced
+  output: true
+  warning: true
+  error: true
+  include: true
+knitr:
+  opts_chunk: 
+    message: true
+---
+
+# Purpose
+This script prepares simulated, fictional example data for my presentation 
+[@Pierce-RN8692].
+
+::: {.callout-tip}
+If this were for a real study, we would probably have a script for importing the 
+raw data from an electronic data file (such as an Excel spreadsheet or an SPSS 
+data file) instead of this one that creates simulated data. 
+
+Also, this box is an example of a Quarto [callout block](https://quarto.org/docs/authoring/callouts.html). 
+:::
+
+# Setup
+
+## Declare Path
+This next chunk declares the path to this script relative to the project-level 
+root directory. If the file is not in the right location under the project root
+you'll get a warning message. This helps ensure relative paths are all working 
+as expected. For this chunk to work, you must have the relevant parameters set 
+properly in the YAML header.
+
+``` {r}
+#| label: declare-path
+
+# Declare path to this script relative to the project root directory.
+here::i_am(path = paste0(params$SourceDir, params$SourceFile))
+```
+
+## Load Packages
+Load R packages required for this script to work. 
+
+```{r}
+#| label: load-packages
+
+library(here)           # for here(), to make code more portable 
+library(rmarkdown)      # for pandoc_version()
+library(devtools)       # for session_info()
+library(dplyr)          # for %>%, bind_cols(), rename(), etc.
+library(piercer)        # for git_report(), sim_2arm_prepost()
+library(quarto)         # for quarto_version()
+```
+
+# Create Example Data
+We need to create some simulated data to use as an example data frame called 
+`MyStudy`. We'll assume a longitudinal randomized controlled trial design with 
+2 groups x 4 sites x 2 time points, with balanced sample size of 20 
+participants per group per site ($N = 160$ participants). 
+
+Population parameters for the simulated data will assume: 
+
+* Correlated ($r = 0.25$) pretest and posttest scores for a continuous, normally 
+  distributed outcome.  
+* Pretest mean of $M = 70$ at for both groups.
+* Posttest means of $M = 75$ for the control group and $M = 81$ for the 
+  treatment group. 
+* Homogeneity of variance, with $SD = 10$ for both pretest and posttest scores
+  in both groups. 
+* No site effect on either pretest or posttest scores. 
+
+```{r}
+#| label: create-MyStudy 
+
+# Example data frame 1
+set.seed(642587)
+MyStudy <- sim_2arm_prepost(Npg = 80, 
+                            VNames = c("x", "y"),
+                            R = matrix(data = c(1, 0.25, 0.25, 1), 
+                                       nrow = 2, ncol = 2, byrow = TRUE),
+                            MV.C = c(x = 70, y = 75),
+                            MV.T = c(x = 70, y = 81),
+                            SV.C = c(x = 10, y = 10),
+                            SV.T = c(x = 10, y = 10)) %>% 
+  bind_cols(., Site = factor(rep(c("A", "B", "C", "D"), times = 40))) %>% 
+  rename(Group = Arm, 
+         Score_Pre = x, 
+         Score_Post = y, 
+         Centered_Score_Pre = cx) %>% 
+  select(PID, Group, Site, Score_Pre, Score_Post, Centered_Score_Pre)
+```
+
+# Save Example Data
+Consistent with the separation principle, we want to store the data in a 
+different folder than either code or output. Because it is a native R data file
+(`*.RData`), we should put it in the `data/` folder per R package conventions. 
+
+We use the `here` package's `here()` function to automate using a relative path 
+name. This argument to the function is a path name relative to the folder that
+contains the RStudio project file for this RStudio project. 
+
+```{r}
+#| label: demonstrate-here-root
+
+# Locate & report the root folder of the RStudio project.
+here()
+```
+
+```{r}
+#| label: demonstrate-here-subfolder
+
+# Locate & report the location of the `data/` subfolder.
+here("data/")
+```
+
+Now we actually save out the data file. This is fictional data, so we can safely 
+commit it to a public GitHub repository and track changes to it.
+
+```{r}
+#| label: save-MyStudy 
+
+# Use here() to specify the desired relative path & file name.
+save(MyStudy, file = here("data/MyStudy.RData"))
+```
+
+# References
+::: {#refs}
+:::
+
+# Software Information
+Show information about the current software environment. This facilitates 
+troubleshooting reproducibility issues if someone else is unable to get the same 
+results I did from the same code. 
+
+We used [R](https://www.r-project.org/) as our main computing environment and 
+[Quarto](https://quarto.org/) scripts to enhance reproducibility. We used 
+[RStudio](www.rstudio.org) as the editor to interface with R and Quarto. 
+
+- Software chain:
+  **qmd file > RStudio > Quarto > R > knitr > md file > Pandoc > HTML file**.
+- Source file: **`r paste0(params$SourceDir, params$SourceFile)`**
+- Output file: **`r paste0(params$SourceDir, "output/", params$LogFile)`**
+- [Quarto `r quarto_version()`](https://quarto.org/) runs `*.qmd` files through 
+  [R](https://www.r-project.org/) and [knitr](https://yihui.org/knitr/) to 
+  produce `*.md` markdown files.
+- [Pandoc `r rmarkdown::pandoc_version()`](https://pandoc.org) converts markdown 
+  files (`*.md`) to other formats, including LaTeX (`*.tex`) and HTML (`*.html`) 
+  among others.
+  
+## Versions
+This document was generated using the following computational environment and 
+dependencies: 
+
+```{r}
+#| label: show-version
+
+# Get R and R package version numbers in use.
+session_info()
+```
+
+## Git Details
+The current Git commit details and status are:
+
+``` {r}
+#| label: git-details
+#| echo: true
+
+git_report()
+```
