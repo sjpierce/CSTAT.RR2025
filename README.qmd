@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# CSTAT.RR2025: Reproducibility Materials For CSTAT Webinar on Reproducible Research
+# CSTAT.RR2025: Materials For CSTAT Webinar on Reproducible Research
 
 <!-- badges: start -->
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)

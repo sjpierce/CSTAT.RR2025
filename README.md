@@ -3,7 +3,7 @@ Steven J. Pierce
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# CSTAT.RR2025: Reproducibility Materials For CSTAT Webinar on Reproducible Research
+# CSTAT.RR2025: Materials For CSTAT Webinar on Reproducible Research
 
 <!-- badges: start -->
 
