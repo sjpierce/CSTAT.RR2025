@@ -1048,7 +1048,7 @@ compare them in detail later. For now, enjoy this guided tour.
     
 :::
 
-## Bonus Resources
+## Bonus Resources {.smaller}
 
 * R for non-programmers: A guide for social scientists [@Dauber-RN8674]
 * What they forgot to teach you about R [@Bryan-RN3998]
@@ -1057,6 +1057,7 @@ compare them in detail later. For now, enjoy this guided tour.
 * R packages: Organize, test, document, and share your code [@Wickham-RN3898]
 * Happy Git and GitHub for the useR [@Bryan-RN3908]
 * [Tutorial: Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
+* Quarto for scientists [@Tierney-RN8702]
 
 ## References {.scrollable}
 
