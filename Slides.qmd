@@ -1015,8 +1015,8 @@ and figures.
 ## MyStudy Demonstration Files
 Let's take a look at actual dynamic documents!
 
-* `scripts/MyStudy_Report.qmd`
-* `scripts/output/MyStudy_Report.html`
+* `MyStudy_Report.qmd`
+* `output/MyStudy_Report.html`
 
 ::: {.notes}
 *Elapsed time should be ~30-32 min, use next 10-15 min to show code and output*
