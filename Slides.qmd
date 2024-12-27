@@ -6,18 +6,17 @@ institute: "Center for Statistical Training and Consulting, Michigan State Unive
 date: March 6, 2025
 title-slide-attributes: 
   data-notes: 1 hr (45-50 min talk + 10-15 min Q & A) My name is Steven Pierce. 
-              My talk today focuses on how R and Quarto provide a foundation 
-              for generating reproducible statistical analyses and reports. 
-              My goal is promote reproducibility and encourage you to build your 
-              capacity and competency by adopting principles, practices, and 
-              tools for reproducible research. Hopefully, sharing my experience 
-              and insights will persuade you why that's beneficial, motivate you 
-              to do so, and accelerate your learning journey. My slides and 
-              example files are available from the link at the bottom of the 
-              screen. The slides have many links to resources built right in and 
-              are themselves a reproducible product. So jot down that link or my 
-              email address so you can get them later. For now, enjoy this 
-              guided tour. 
+              My talk today focuses on some principles, practices, and tools for 
+              generating reproducible statistical analyses and reports. My goal 
+              is to promote reproducibility and encourage you to build your 
+              capacity to engage in reproducible research. Hopefully, sharing my 
+              experience and insights will persuade you why that's beneficial, 
+              motivate you to do so, and accelerate your learning journey. My 
+              slides and example files are available from the link at the bottom 
+              of the screen. The slides have many links to resources built right 
+              in and are themselves a reproducible product. So jot down that 
+              link or my email address so you can get them later. For now, enjoy 
+              this guided tour. 
 csl: apa-numeric-superscript-brackets.csl
 bibliography: references.bib
 format: 
@@ -51,8 +50,8 @@ library(kableExtra) # Functions for formatting nice tables.
 * Demonstration
 
 ::: {.notes}
-I've organized this talk around answering three questions that you're probably
-already thinking about right now. They are: "What do you mean by reproducible?"
+I've organized this talk around answering three questions that you may already
+be thinking about right now. They are: "What do you mean by reproducible?"
 "Why should we aim for reproducibility?", and "How do we achieve
 reproducibility?" After answering those questions, I'm going to do a 
 demonstration. 
@@ -78,10 +77,10 @@ analyses.
 ::: {.notes}
 Reproducible research is research for which the investigators have shared all
 the materials required to exactly recreate the findings so that others can
-verify them or conduct alternative analyses. Some of you may work in the private 
-sector rather than academia. This is still a worthwhile goal even if you work in 
-a business and are creating statistical reports that will not turn into academic 
-publications. That just means your audience may be smaller.
+verify them or conduct alternative analyses. Reproducibility is important 
+regardless of whether your report will turn into an academic publication or 
+instead focus on some other audience, such as policy makers or business leaders,
+because all audiences need to assess the quality and credibility of your work. 
 :::
 
 ## Statistical Results Can Be:
@@ -153,10 +152,9 @@ RR is a product of *how we work*, not which methods we use.
 ::: {.notes}
 Reproducible research is a product of the research process that’s presumably
 independent of whether we use quantitative, qualitative, or mixed methods. What
-matters is how we work and share the materials. I suspect it’s easier to apply 
-the principles to quantitative methods and those are my forte as a 
-statistician--and probably yours as R users--so I'll focus on that route to 
-reproducibility today.
+matters is how we work and share the materials. That said, I suspect it’s easier 
+to apply the principles to quantitative methods and those are my forte as a 
+statistician, so I'll focus on that route to reproducibility today.
 :::
 
 # Why aim for <br> reproducibility? {background-image="graphics/Woman_Raising_Hand.jpg" background-size="contain" background-position="right" background-repeat="no-repeat"}
@@ -342,9 +340,9 @@ standards.
 
 ::: {.notes}
 There are some real career benefits of striving to create reproducible research
-and evaluation products. For example, it motivates you to be more careful about
-avoiding errors, thereby increasing the quality of your work. It will make you
-more efficient and the process yields more products. It may be easier to get
+products. For example, it motivates you to be more careful about avoiding
+errors, thereby increasing the quality of your work. It will make you more
+efficient and the process yields more products. It may be easier to get
 published--and to publish in better journals--and you might ultimately get cited
 more often as people either adopt your methods, use your data for new studies,
 or discuss your work as an exemplar of high quality science. That will all build
@@ -502,15 +500,15 @@ of stone knives and bearskins."
 ::: {.notes}
 Fortunately, there's a better way to do analyses and write reports. It depends
 on additional open-source software and learning new workflows. These are my
-favorite tools now. As you all know, R is a fantastic tool for managing and
-analyzing data and creating figures. RStudio Desktop is an excellent editor for
-working with R that also simplifies using Quarto, TinyTeX, Git, and GitHub.
-These other tools may be less familiar to you than R and RStudio. Quarto
-supports creating dynamic documents that render to a variety of output formats
-(HTML, PDF, Word, PowerPoint, etc.), TinyTex helps Quarto produce nice PDF
-output, while Git and GitHub together support version control, collaboration,
-and sharing materials. Collectively, they comprise an elegant, integrated set of
-tools for doing reproducible analyses and reports.
+favorite tools now. R is a fantastic tool for managing and analyzing data and
+creating figures. RStudio Desktop is an excellent editor for working with R that
+also simplifies using Quarto, TinyTeX, Git, and GitHub. These other tools may be
+less familiar to you than R and RStudio. Quarto supports creating dynamic
+documents that render to a variety of output formats (HTML, PDF, Word,
+PowerPoint, etc.), TinyTex helps Quarto produce nice PDF output, while Git and
+GitHub together support version control, collaboration, and sharing materials.
+Collectively, they comprise an elegant, integrated set of tools for doing
+reproducible analyses and reports.
 :::
 
 ## Dynamic Documents Via Quarto + R
@@ -922,7 +920,7 @@ compendium must either include the data and metadata, or tell people how to get
 them from some accessible source. Document methodology decisions and rationales
 in your scripts and keep all the code that actually produces your output.
 Keeping version histories of repository contents is a major bonus, but not
-strictly required. Use a scripts to automate recording information about the
+strictly required. Use a script to automate recording information about the
 software environment to meet the documentation criterion for reproducibility.
 :::
 
