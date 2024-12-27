@@ -184,9 +184,8 @@ The following exceptions apply:
   under the CC BY-NC-SA license. They are intellectual property owned by 
   Michigan State University. I use them for branding purposes because I am an 
   MSU employee. 
-* Similarly, I assume that graphics files for the logos of the American 
-  Evaluation Association (AEA), the National Institutes of Health (NIH), the 
-  National Science Foundation (NSF), and the Institute of Education Sciences 
-  (IES) are the intellectual property of their respective organizations and also 
-  do not fall under the CC BY-NC-SA license. Their use in this repository should 
-  fall under fair use provisions of trademark law.
+* Similarly, I assume that graphics files for the logos of National Institutes 
+  of Health (NIH), the National Science Foundation (NSF), and the Institute of 
+  Education Sciences (IES) are the intellectual property of their respective 
+  organizations and also do not fall under the CC BY-NC-SA license. Their use in 
+  this repository should fall under fair use provisions of trademark law.
