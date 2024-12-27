@@ -164,7 +164,7 @@ reproducibility today.
 :::: {.columns}
 
 ::: {.column width="45%"}
-Several forces are promoting and enabling the push toward reproducibility.
+Several forces are promoting and enabling the push toward it.
 :::
 
 ::::
