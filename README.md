@@ -157,8 +157,8 @@ Quarto scripts from the source code:
   `Slides.qmd`).
 - Click the *Render* button in RStudio source editor pane.
 
-That will generate the output file (e.g., `Slides.html`) and overwrite
-any prior version of it that exists in your local copy of the
+That will generate the output file (e.g., `output/Slides.html`) and
+overwrite any prior version of it that exists in your local copy of the
 repository.
 
 ## References
