@@ -77,8 +77,6 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     know what you are doing! This folder is not tracked by Git.
   - `.Rproj.user/`: This hidden folder is used by Rstudio. Leave it
     alone!
-  - `_brand.yml`: This file contains color palette, font, and logo
-    settings for CSTAT branding.
   - `_extensions/`: This folder contains files for Quarto extensions
     used by my presentation slides.
   - `data/`: This folder is intended to hold R Data files (`*.RData`).
@@ -104,6 +102,9 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     - `Slides.html`: These are the slides used during the presentation.
   - `.gitignore`: This file tells Git what files to ignore and omit from
     synchronizing with the main repository on GitHub.
+  - `_brand.yml`: This file contains color palette, font, and logo
+    settings for CSTAT branding that get applied across slides and other
+    outputs.  
   - `_quarto.yml`: This is a Quarto metadata file containing
     project-level YAML code that will be inherited by Quarto scripts in
     this folder or its subfolders.  
@@ -125,8 +126,9 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
   - `Create_MyStudy_Data.qmd`: This Quarto script creates the example
     file `data/MyStudy.RData`. The output from rendering the script is
     stored `output/Create_MyStudy_Data.html`.
-  - `CSTAT_theme.css`: This is custom style sheet file to provide color
-    scheme, fonts, etc. for my slides.  
+  - `CSTAT_theme.css`: This is custom style sheet file to provide
+    formatting settings and classes for my slides and other HTML
+    outputs. It supplements `_brand.yml`.
   - `CSTAT.RR2025.Rproj`: This is an RStudio project file. It contains
     some settings for working with the project in that software.
   - `MyStudy_Report.qmd`: This Quarto script is an example dynamic
