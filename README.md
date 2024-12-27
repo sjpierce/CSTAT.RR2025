@@ -45,12 +45,12 @@ files are the resulting rendered output. The output should work in
 common web browsers like Chrome, Edge, and Firefox.
 
 - [`Slides.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Slides.qmd)  
-- [`Slides.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Slides.html)
+- [`Slides.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/Slides.html)
   *If you just want a copy of the final slides, this is it!*
-- [`Create_MyStudy_Data.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/Create_MyStudy_Data.qmd)
-- [`Create_MyStudy_Data.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/output/Create_MyStudy_Data.html)
-- [`MyStudy_Report.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/MyStudy_Report.qmd)
-- [`MyStudy_Report.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/output/MyStudy_Report.html)
+- [`Create_MyStudy_Data.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Create_MyStudy_Data.qmd)
+- [`Create_MyStudy_Data.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/Create_MyStudy_Data.html)
+- [`MyStudy_Report.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/MyStudy_Report.qmd)
+- [`MyStudy_Report.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/MyStudy_Report.html)
 
 ## Usage Tips
 
@@ -85,11 +85,6 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
       `scripts/MyStudy_Report.qmd`.
   - `graphics/`: This folder stores `.jpg` and `.png` graphics files
     used in my slides.
-  - `scripts/`: The folder holds script files that I occasionally find
-    useful.
-    - `.quarto/`: This hidden folder may be created by Quarto to hold
-      temporary files. Do not edit or delete any of these files unless
-      you know what you are doing! This folder is not tracked by Git.
   - `output/`: This folder holds rendered output from scripts in this
     Quarto project.
     - `graphics/`: This subfolder is created when you render the slides
@@ -102,21 +97,15 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
     - `Slides.html`: These are the slides used during the presentation.
   - `.gitignore`: This file tells Git what files to ignore and omit from
     synchronizing with the main repository on GitHub.
-  - `_brand.yml`: This file contains color palette, font, and logo
-    settings for CSTAT branding that get applied across slides and other
-    outputs.  
+  - `_brand.yml`: This Quarto metdata file contains color palette, font,
+    and logo settings for CSTAT branding that get applied across slides
+    and other outputs.  
   - `_quarto.yml`: This is a Quarto metadata file containing
     project-level YAML code that will be inherited by Quarto scripts in
     this folder or its subfolders.  
   - `apa.csl`: This is a citation style language file for the
     Publication Manual of the American Psychological Association, 7th
     edition. It is used by Quarto to format references.
-  - `apa-numeric-superscript.csl`: This is a citation style language
-    file for the Publication Manual of the American Psychological
-    Association, 7th ed. that has been adapted to use numeric
-    superscripts for in-text citations and put the reference list in the
-    order the citations were used. It is used by Quarto to format
-    reference sections.
   - `apa-numeric-superscript-brackets.csl`: This is a citation style
     language file for the Publication Manual of the American
     Psychological Association, 7th ed. that has been adapted to use
