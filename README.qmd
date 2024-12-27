@@ -58,12 +58,12 @@ the resulting rendered output. The output should work in common web browsers
 like Chrome, Edge, and Firefox. 
 
 * [`Slides.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Slides.qmd)           
-* [`Slides.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Slides.html) 
+* [`Slides.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/Slides.html) 
   *If you just want a copy of the final slides, this is it!*
-* [`Create_MyStudy_Data.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/Create_MyStudy_Data.qmd)
-* [`Create_MyStudy_Data.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/output/Create_MyStudy_Data.html)
-* [`MyStudy_Report.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/MyStudy_Report.qmd)
-* [`MyStudy_Report.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/scripts/output/MyStudy_Report.html)
+* [`Create_MyStudy_Data.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/Create_MyStudy_Data.qmd)
+* [`Create_MyStudy_Data.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/Create_MyStudy_Data.html)
+* [`MyStudy_Report.qmd`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/MyStudy_Report.qmd)
+* [`MyStudy_Report.html`](https://github.com/sjpierce/CSTAT.RR2025/blob/main/output/MyStudy_Report.html)
 
 ## Usage Tips
 
