@@ -148,7 +148,7 @@ yourself. To render either my presentation slides or my other example
 Quarto scripts from the source code:
 
 - Install the necessary [software for reproducible research with
-  R](https://sjpierce.github.io/rr_software.html)
+  R](https://sjpierce.github.io/rr_software.html).
 - Download or clone the repository to your computer (preferably using
   Git).
 - Double-click the `CSTAT.RR2025.Rproj` file from Windows Explorer to
