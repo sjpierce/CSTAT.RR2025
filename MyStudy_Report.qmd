@@ -10,35 +10,35 @@ author:
     email: pierces1@msu.edu
     affiliations: 
       - name: Michigan State University, Center for Statistical Training and Consulting
-bibliography: references.bib
-csl: apa.csl
-date: now
-date-modified: last-modified
-date-format: YYYY-MM-DD HH:mm:ss z
-params:
-  SourceDir: ""
-  SourceFile: "MyStudy_Report.qmd"
-  LogFile: "MyStudy_Report.html"
+bibliography: references.bib          # File holds BibTeX data for references
+csl: apa.csl                          # File controls citation & reference list format
+date: now                             # Sets Date Published = when script is rendered
+date-modified: last-modified          # Sets Date Modified = when code was last saved
+date-format: YYYY-MM-DD HH:mm:ss z    # Show date, time, & timezone
+params:                               # Default values for parameters
+  SourceDir: ""                       # Relative path to folder holding this file
+  SourceFile: "MyStudy_Report.qmd"    # Name of this script file
+  LogFile: "MyStudy_Report.html"      # Name of rendered output file
 format: 
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: left
-    number-sections: true
-    number-depth: 3
-    code-fold: true 
-    code-tools: true
-    code-line-numbers: false
-    embed-resources: true 
+  html:                               # Settings for HTML output
+    toc: true                         # Include table of contents (TOC)
+    toc-depth: 3                      # Number of layers in TOC
+    toc-location: left                # Where to display the TOC
+    number-sections: true             # Auto-number each section
+    number-depth: 3                   # Number of layers for section numbering
+    code-fold: true                   # Default to collapsing code chunks
+    code-tools: true                  # Adds control for show/hide all code
+    code-line-numbers: false          # Skip numbering lines in code chunks
+    embed-resources: true             # Makes HTML output file self-contained
     anchor-sections: true
-execute:
+execute:                              # Default Quarto chunk execution options
   eval: true
-  echo: fenced
+  echo: fenced                        # Show the code in the output file
   output: true
   warning: true
   error: true
   include: true
-knitr:
+knitr:                                # Default R knitr package chunk options
   opts_chunk: 
     message: true
 ---

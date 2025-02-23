@@ -17,21 +17,21 @@ title-slide-attributes:
               in and are themselves a reproducible product. So jot down that 
               link or my email address so you can get them later. For now, enjoy 
               this guided tour. 
-csl: apa-numeric-superscript-brackets.csl
-bibliography: references.bib
+csl: apa-numeric-superscript-brackets.csl      # File controls citation & reference list format
+bibliography: references.bib                   # File holds BibTeX data for references
 format: 
-  revealjs:
-    embed-resources: true
-    theme: [default, brand, CSTAT_theme.scss]
-    controls: true
-    slide-number: c/t
-    show-notes: false
+  revealjs:                                    # Settings for HTML revealjs slide output
+    embed-resources: true                      # Makes HTML output file self-contained
+    theme: [default, brand, CSTAT_theme.scss]  # Theme controls output formatting
+    controls: true                             # Turn on visible slide controls
+    slide-number: c/t                          # Turn on slide numbering
+    show-notes: false                          # Hide notes (except in speaker view)
     header-logo: graphics/Combomark-Horiz_Green-RGB.png
     footer: <a href="https://github.com/sjpierce/CSTAT.RR2025">https://github.com/sjpierce/CSTAT.RR2025</a>
-    link-external-icon: true
-    link-external-newwindow: true
-filters:
-  - reveal-header
+    link-external-icon: true                   # Mark links that lead to external sites
+    link-external-newwindow: true              # Open external web links in a new window
+filters:                                       # Filters are Quarto extensions
+  - reveal-header                              # Allows footer text & header logo
 ---
 
 ```{r}
