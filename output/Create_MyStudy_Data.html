@@ -2384,14 +2384,14 @@ Create Example Data for Reproducible Research Presentation</p></h1><button type=
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025-02-13 20:52:45 EST</p>
+      <p class="date">2025-02-23 13:32:33 EST</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2024-12-26 01:37:01 EST</p>
+      <p class="date-modified">2025-02-23 13:12:32 EST</p>
     </div>
   </div>
     
@@ -2426,7 +2426,7 @@ Tip
 <h2 data-number="2.1" class="anchored" data-anchor-id="declare-path"><span class="header-section-number">2.1</span> Declare Path</h2>
 <p>This next chunk declares the path to this script relative to the project-level root directory. If the file is not in the right location under the project root you’ll get a warning message. This helps ensure relative paths are all working as expected. For this chunk to work, you must have the relevant parameters set properly in the YAML header.</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: declare-path</span></span>
@@ -2444,7 +2444,7 @@ Tip
 <h2 data-number="2.2" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">2.2</span> Load Packages</h2>
 <p>Load R packages required for this script to work.</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-packages</span></span>
@@ -2457,7 +2457,7 @@ Tip
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: usethis</code></pre>
 </div>
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-packages</span></span>
@@ -2479,7 +2479,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-packages</span></span>
@@ -2504,7 +2504,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <li>No site effect on either pretest or posttest scores.</li>
 </ul>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: create-MyStudy </span></span>
@@ -2534,7 +2534,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <p>Consistent with the separation principle, we want to store the data in a different folder than either code or output. Because it is a native R data file (<code>*.RData</code>), we should put it in the <code>data/</code> folder per R package conventions.</p>
 <p>We use the <code>here</code> package’s <code>here()</code> function to automate using a relative path name. This argument to the function is a path name relative to the folder that contains the RStudio project file for this RStudio project.</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: demonstrate-here-root</span></span>
@@ -2548,7 +2548,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 </div>
 </div>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: demonstrate-here-subfolder</span></span>
@@ -2563,7 +2563,7 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 </div>
 <p>Now we actually save out the data file. This is fictional data, so we can safely commit it to a public GitHub repository and track changes to it.</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: save-MyStudy </span></span>
@@ -2597,7 +2597,7 @@ Pierce, S. J. (2025, March 6). <em>Reproducible research: Principles, practices,
 <h2 data-number="6.1" class="anchored" data-anchor-id="versions"><span class="header-section-number">6.1</span> Versions</h2>
 <p>This document was generated using the following computational environment and dependencies:</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: show-version</span></span>
@@ -2609,7 +2609,7 @@ Pierce, S. J. (2025, March 6). <em>Reproducible research: Principles, practices,
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in system2(&quot;quarto&quot;, &quot;-V&quot;, stdout = TRUE, env = paste0(&quot;TMPDIR=&quot;, :
 running command &#39;&quot;quarto&quot;
-TMPDIR=C:/Users/pierces1/AppData/Local/Temp/RtmpymzKx9/file74d435204eb8 -V&#39; had
+TMPDIR=C:/Users/pierces1/AppData/Local/Temp/RtmpAhhRSx/file6af0194a6f31 -V&#39; had
 status 1</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -2623,7 +2623,7 @@ status 1</code></pre>
  collate  English_United States.utf8
  ctype    English_United States.utf8
  tz       America/New_York
- date     2025-02-13
+ date     2025-02-23
  pandoc   3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
  quarto   NA @ C:\\PROGRA~1\\Quarto\\bin\\quarto.exe
 
@@ -2633,7 +2633,7 @@ status 1</code></pre>
  backports     1.5.0   2024-05-23 [1] CRAN (R 4.4.0)
  broom         1.0.7   2024-09-26 [1] CRAN (R 4.4.1)
  cachem        1.1.0   2024-05-16 [1] CRAN (R 4.4.0)
- cli           3.6.3   2024-06-21 [1] CRAN (R 4.4.1)
+ cli           3.6.4   2025-02-13 [1] CRAN (R 4.4.2)
  colorspace    2.1-1   2024-07-26 [1] CRAN (R 4.4.1)
  devtools    * 2.4.5   2022-10-11 [1] CRAN (R 4.4.0)
  digest        0.6.37  2024-08-19 [1] CRAN (R 4.4.1)
@@ -2655,7 +2655,7 @@ status 1</code></pre>
  htmlwidgets   1.6.4   2023-12-06 [1] CRAN (R 4.4.0)
  httpuv        1.6.15  2024-03-26 [1] CRAN (R 4.4.0)
  httr          1.4.7   2023-08-15 [1] CRAN (R 4.4.0)
- jsonlite      1.8.9   2024-09-20 [1] CRAN (R 4.4.1)
+ jsonlite      1.9.0   2025-02-19 [1] CRAN (R 4.4.2)
  knitr         1.49    2024-11-08 [1] CRAN (R 4.4.2)
  later         1.4.1   2024-11-27 [1] CRAN (R 4.4.2)
  lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.4.0)
@@ -2677,10 +2677,10 @@ status 1</code></pre>
  processx      3.8.5   2025-01-08 [1] CRAN (R 4.4.2)
  profvis       0.4.0   2024-09-20 [1] CRAN (R 4.4.1)
  promises      1.3.2   2024-11-28 [1] CRAN (R 4.4.2)
- ps            1.8.1   2024-10-28 [1] CRAN (R 4.4.1)
+ ps            1.9.0   2025-02-18 [1] CRAN (R 4.4.2)
  purrr         1.0.4   2025-02-05 [1] CRAN (R 4.4.2)
  quarto      * 1.4.4   2024-07-20 [1] CRAN (R 4.4.1)
- R6            2.5.1   2021-08-19 [1] CRAN (R 4.4.0)
+ R6            2.6.1   2025-02-15 [1] CRAN (R 4.4.2)
  Rcpp          1.0.14  2025-01-12 [1] CRAN (R 4.4.2)
  remotes       2.5.0   2024-03-17 [1] CRAN (R 4.4.0)
  rlang         1.1.5   2025-01-17 [1] CRAN (R 4.4.2)
@@ -2694,12 +2694,12 @@ status 1</code></pre>
  tibble        3.2.1   2023-03-20 [1] CRAN (R 4.4.0)
  tidyr         1.3.1   2024-01-24 [1] CRAN (R 4.4.0)
  tidyselect    1.2.1   2024-03-11 [1] CRAN (R 4.4.0)
- tinytex       0.54    2024-11-01 [1] CRAN (R 4.4.1)
+ tinytex       0.55    2025-02-19 [1] CRAN (R 4.4.2)
  urlchecker    1.0.1   2021-11-30 [1] CRAN (R 4.4.0)
  usethis     * 3.1.0   2024-11-26 [1] CRAN (R 4.4.2)
  vctrs         0.6.5   2023-12-01 [1] CRAN (R 4.4.0)
  withr         3.0.2   2024-10-28 [1] CRAN (R 4.4.1)
- xfun          0.50    2025-01-07 [1] CRAN (R 4.4.2)
+ xfun          0.51    2025-02-19 [1] CRAN (R 4.4.2)
  xtable        1.8-4   2019-04-21 [1] CRAN (R 4.4.0)
  yaml          2.3.10  2024-07-26 [1] CRAN (R 4.4.1)
 
@@ -2715,23 +2715,24 @@ status 1</code></pre>
 <h2 data-number="6.2" class="anchored" data-anchor-id="git-details"><span class="header-section-number">6.2</span> Git Details</h2>
 <p>The current Git commit details and status are:</p>
 <div class="cell">
-<details open class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Local:    main C:/Users/pierces1/OneDrive - Michigan State University/CSTATRedirects/Documents/Professional/Presentations/CSTAT.RR2025
 Remote:   main @ origin (https://github.com/sjpierce/CSTAT.RR2025.git)
-Head:     [8d03e69] 2025-02-14: Rendered slides.
+Head:     [21d5c0c] 2025-02-23: Add comments to YAML header for teaching purposes.
  </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Untracked files:
     Untracked:  Create_MyStudy_Data.rmarkdown
+    Untracked:  Slides.html
 
 Unstaged changes:
-    Modified:   output/Create_MyStudy_Data.html
-    Modified:   output/MyStudy_Report.html</code></pre>
+    Modified:   output/MyStudy_Report.html
+    Modified:   output/Slides.html</code></pre>
 </div>
 </div>
 <!-- -->
@@ -3220,35 +3221,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">    email: pierces1@msu.edu</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliations: </span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: Michigan State University, Center for Statistical Training and Consulting</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="an">csl:</span><span class="co"> apa.csl</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> now</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> YYYY-MM-DD HH:mm:ss z</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="an">params:</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">  SourceDir: &quot;&quot;</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">  SourceFile: &quot;Create_MyStudy_Data.qmd&quot;</span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">  LogFile: &quot;Create_MyStudy_Data.html&quot;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib          # File holds BibTeX data for references</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="an">csl:</span><span class="co"> apa.csl                          # File controls citation &amp; reference list format</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> now                             # Sets Date Published = when script is rendered</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified          # Sets Date Modified = when code was last saved</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> YYYY-MM-DD HH:mm:ss z    # Show date, time, &amp; timezone</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="an">params:</span><span class="co">                               # Default values for parameters</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">  SourceDir: &quot;&quot;                       # Relative path to folder holding this file</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">  SourceFile: &quot;Create_MyStudy_Data.qmd&quot;  # Name of this script file</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co">  LogFile: &quot;Create_MyStudy_Data.html&quot;    # Name of rendered output file</span></span>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">    number-depth: 3</span></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: show</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co">    code-line-numbers: false</span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true </span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co">  html:                               # Settings for HTML output</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true                         # Include table of contents (TOC)</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3                      # Number of layers in TOC</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left                # Where to display the TOC</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true             # Auto-number each section</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="co">    number-depth: 3                   # Number of layers for section numbering</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true                   # Default to collapsing code chunks</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true                  # Adds control for show/hide all code</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co">    code-line-numbers: false          # Skip numbering lines in code chunks</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true             # Makes HTML output file self-contained</span></span>
 <span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="co">    anchor-sections: true</span></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span><span class="co">                              # Default Quarto chunk execution options</span></span>
 <span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: fenced</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: fenced                        # Show the code in the output file</span></span>
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">  output: true</span></span>
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: true</span></span>
 <span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co">  error: true</span></span>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a><span class="co">  include: true</span></span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="an">knitr:</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a><span class="an">knitr:</span><span class="co">                                # Default R knitr package chunk options</span></span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="co">  opts_chunk: </span></span>
 <span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="co">    message: true</span></span>
 <span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
