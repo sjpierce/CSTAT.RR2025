@@ -57,9 +57,9 @@ reproducibility?" After answering those questions, I'm going to do a
 demonstration. 
 :::
 
-::: {style="text-align: right;"}
-# What do you mean by <br> reproducible?  {background-image="graphics/pexels-august-de-richelieu-4427508.jpg" background-size="contain" background-position="left" background-repeat="no-repeat"}
+# What do you mean by <br> reproducible?  {background-image="graphics/pexels-august-de-richelieu-4427508.jpg" background-size="contain" background-position="left" background-repeat="no-repeat" style="text-align: right;"}
 
+::: {style="text-align: right;"}
 Let's define some concepts.
 <br> <br> <br> <br> <br>
 :::
