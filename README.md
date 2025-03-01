@@ -115,9 +115,13 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
   - `Create_MyStudy_Data.qmd`: This Quarto script creates the example
     file `data/MyStudy.RData`. The output from rendering the script is
     stored `output/Create_MyStudy_Data.html`.
-  - `CSTAT_theme.css`: This is custom style sheet file to provide
+  - `CSTAT_style.css`: This is custom style sheet file to provide
+    formatting settings and classes for my HTML outputs. It supplements
+    `_brand.yml` and `CSTAT_theme.scss`. Specifically, this sets up the
+    logo and title banner formatting at the top of the output.
+  - `CSTAT_theme.scss`: This is Sasy custom style sheet file to provide
     formatting settings and classes for my slides and other HTML
-    outputs. It supplements `_brand.yml`.
+    outputs. It supplements `_brand.yml` and `CSTAT_style.css`.
   - `CSTAT.RR2025.Rproj`: This is an RStudio project file. It contains
     some settings for working with the project in that software.
   - `MyStudy_Report.qmd`: This Quarto script is an example dynamic
