@@ -1,3 +1,7 @@
 project:
   title: "CSTAT.RR2025"
   output-dir: "output"
+  render:
+    - Slides.qmd
+    - Create_MyStudy_Data.qmd
+    - MyStudy_Report.qmd
