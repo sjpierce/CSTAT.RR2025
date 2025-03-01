@@ -231,10 +231,10 @@ Roger Peng has argued that RR is an attainable minimum standard for science
 
 ::: {.column width="15%"}
 
-![](graphics/NIH_Logo.png){fig-alt="NIH logo." width=75% height=75%}
-![](graphics/NSF_Logo.jpg){fig-alt="NSF logo."  width=75% height=75%}
+![](graphics/NIH_Logo.png){fig-alt="NIH logo." height=10%}
+![](graphics/NSF_Logo.jpg){fig-alt="NSF logo."  width=70%}
 
-![](graphics/IES+logo.png){fig-alt="IES logo." width=125% height=125%}
+![](graphics/IES+logo.png){fig-alt="IES logo." width=130%}
 :::
 
 ::: {.column width="85%"} 
