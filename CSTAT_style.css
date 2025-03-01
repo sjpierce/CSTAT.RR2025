@@ -1,0 +1,17 @@
+.quarto-title-block .quarto-title-banner {
+  background-image: url(graphics/logo_MSU_CSTAT.png);
+  background-color: white;
+  background-size: 250px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 0px;
+  background-origin: content-box;
+}
+
+.quarto-title-banner {
+  margin-block-end: 1rem;
+  position: relative;
+  margin-top: 1px;
+  height: 85%;
+}
+
