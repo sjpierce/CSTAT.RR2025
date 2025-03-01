@@ -17,6 +17,7 @@ color:
   primary: blue
 
 logo:
+  large: graphics/logo_MSU_CSTAT.png
   medium: graphics/CSTAT_5x5_Transparent.png
 
 typography:
