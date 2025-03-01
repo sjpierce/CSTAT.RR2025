@@ -84,12 +84,16 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
       `scripts/Create_MyStudy_Data.qmd` and used by
       `scripts/MyStudy_Report.qmd`.
   - `graphics/`: This folder stores `.jpg` and `.png` graphics files
-    used in my slides.
+    used in my slides and example files.
   - `output/`: This folder holds rendered output from scripts in this
     Quarto project.
     - `graphics/`: This subfolder is created when you render the slides
       or other scripts. It holds temporary copies of graphics files used
       to create the HTML output files. You can ignore or delete it.
+    - `site_libs/`: This folder holds shared files for a website that
+      get created when I render the scripts. They include things like
+      CSS, JavaScript, and HTML widget libraries, which help to avoid
+      duplicating files across multiple output documents.
     - `Create_MyStudy_Data.html`: This is created by rendering
       `scripts/Create_MyStudy_Data.qmd`.
     - `MyStudy_Report.html`: This is created by rendering
@@ -118,8 +122,8 @@ project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-P
   - `CSTAT_style.css`: This custom style sheet provides logo and title
     banner formatting settings and classes for my HTML outputs. It
     supplements `_brand.yml` and `CSTAT_theme.scss`.
-  - `CSTAT_theme.scss`: This is Sasy custom style sheet file to provide
-    formatting settings and classes for my slides and other HTML
+  - `CSTAT_theme.scss`: This is a Sassy custom style sheet file to
+    provide formatting settings and classes for my slides and other HTML
     outputs. It supplements `_brand.yml` and `CSTAT_style.css`.
   - `CSTAT.RR2025.Rproj`: This is an RStudio project file. It contains
     some settings for working with the project in that software.
