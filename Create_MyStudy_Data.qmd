@@ -1,8 +1,6 @@
 ---
-title: | 
-  ![](graphics/logo_MSU_CSTAT.png){width=3in style="margin-right: 55px;" fig-alt="Spartan helmet with MSU/CSTAT wordmark."}  
-  ![](graphics/CSTAT_5x5_Transparent.png){width=1.5in align="right" fig-alt="CSTAT logo."} \
-  Create Example Data for Reproducible Research Presentation
+title: "Create Example Data for Reproducible Research Presentation"
+subtitle: "An Example Dynamic Document"
 author: 
   - name: Steven J. Pierce
     orcid: 0000-0002-0679-3019
@@ -18,8 +16,12 @@ params:                               # Default values for parameters
   SourceDir: ""                       # Relative path to folder holding this file
   SourceFile: "Create_MyStudy_Data.qmd"  # Name of this script file
   LogFile: "Create_MyStudy_Data.html"    # Name of rendered output file
+css: CSTAT_style.css                  # Formats title banner block w/ logo.
+title-block-banner: true              # Enable the banner, per CSTAT_style.css 
+title-block-banner-color: "#18453B"   # Spartan Green color for title text. 
 format: 
   html:                               # Settings for HTML output
+    theme: [default, brand, CSTAT_theme.scss]  # Theme controls output formatting
     toc: true                         # Include table of contents (TOC)
     toc-depth: 3                      # Number of layers in TOC
     toc-location: left                # Where to display the TOC
