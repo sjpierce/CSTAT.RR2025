@@ -995,9 +995,21 @@ contains headings, narrative text, code, citations, links, and cross-references.
 
 * [Inline code](https://quarto.org/docs/computations/inline-code.html) lets you 
   insert dynamic text or numbers into sentences. 
+
+  ```
+  The mean of x is `{{r}} mean(x)`. 
+  ```
+
 * [Code chunks](https://quarto.org/docs/computations/r.html) allow you to do
-  larger computations and insert more complex results. 
+  larger computations and insert more complex results.  
   
+  ``` {{r}}
+  #| label fig-example
+  
+  ggplot(mydata, aes(distance, time)) +
+    xlab("Race Distance") +
+    ylab("Running Time (minutes)")
+  ```
 ::::
 
 ::: {.notes}
