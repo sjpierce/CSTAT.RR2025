@@ -354,6 +354,12 @@ your professional reputation.
 Understand the criteria, then apply principles, practices, & tools. 
 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
 
+::: {.notes}
+So the third question is "how do we achieve reproducibility?". After you 
+understand the relevant criteria, it a matter of applying some principles, 
+practices and tools. 
+:::
+
 ::: {style="text-align: center;"}
 ## Criteria for Reproducbility <br> [@Peng-RN3189] {background-image="graphics/Woman_Thinking.png" background-size="contain" background-position="left" background-repeat="no-repeat"}
 
