@@ -2,7 +2,7 @@
 title: "Reproducible Research: Principles, Practices, and Tools for Generating Reproducible Statistical Analyses and Reports"
 subtitle: "CSTAT webinar series on Responsible and Ethical Conduct of Research, East Lansing, MI"
 author: "Steven J. Pierce"
-institute: "Center for Statistical Training and Consulting, Michigan State University"
+institute: "Michigan State University, Center for Statistical Training and Consulting"
 date: March 6, 2025
 title-slide-attributes: 
   data-notes: 1 hr (45-50 min talk + 10-15 min Q & A) My name is Steven Pierce. 
