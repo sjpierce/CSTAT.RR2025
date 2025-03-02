@@ -6,7 +6,7 @@ author:
     orcid: 0000-0002-0679-3019
     email: pierces1@msu.edu
     affiliations: 
-      - name: Michigan State University, Center for Statistical Training and Consulting
+      - name: Michigan State University, Center for Statistical Training and Consulting  [https://cstat.msu.edu](https://cstat.msu.edu)
 bibliography: references.bib          # File holds BibTeX data for references
 csl: apa.csl                          # File controls citation & reference list format
 date: now                             # Sets Date Published = when script is rendered
