@@ -986,6 +986,29 @@ files from their version histories.
 * YAML header contains metadata, options, & parameters
 * Body contains the main content 
 
+:::: {.columns  style="font-size:0.75em"}
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+* Headings 
+* Text w/ formatting
+* Bulleted lists
+* In-text citations
+* Callout boxes
+:::
+
+::: {.column width="50%"}
+* Code
+* Equations
+* Tables & figures
+* Cross-references
+* Reference list
+:::
+
+::::
+
 ::: {.notes}
 I will show you an some example files in a minute but it helps to understand 
 a little about the anatomy of a Quarto script first. It is just a plain text 
