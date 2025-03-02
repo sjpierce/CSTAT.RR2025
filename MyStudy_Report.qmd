@@ -16,7 +16,7 @@ params:                               # Default values for parameters
   SourceDir: ""                       # Relative path to folder holding this file
   SourceFile: "MyStudy_Report.qmd"    # Name of this script file
   LogFile: "MyStudy_Report.html"      # Name of rendered output file
-css: CSTAT_style.css                  # Formats title banner block w/ logo.
+css: CSTAT_style.css                  # File formats title banner block w/ logo.
 title-block-banner: true              # Enable the banner, per CSTAT_style.css 
 title-block-banner-color: "#18453B"   # Spartan Green color for title text. 
 format: 
