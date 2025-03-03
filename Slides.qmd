@@ -15,8 +15,7 @@ title-slide-attributes:
               slides and example files are available from the link at the bottom 
               of the screen. The slides have many links to resources built right 
               in and are themselves a reproducible product. So jot down that 
-              link or my email address so you can get them later. For now, enjoy 
-              this guided tour. 
+              link so you can get them later. For now, enjoy this guided tour. 
 csl: apa-numeric-superscript-brackets.csl      # File controls citation & reference list format
 bibliography: references.bib                   # File holds BibTeX data for references
 format: 
@@ -1010,12 +1009,13 @@ files from their version histories.
 ::::
 
 ::: {.notes}
-I will show you an some example files in a minute but it helps to understand 
-a little about the anatomy of a Quarto script first. It is just a plain text 
-file with a name that ends in `.qmd`. It uses a simple markdown syntax to format
-the output it will render. The top of the file is the YAML header, which
-contains document-level metadata, options, and parameters. The body of the file
-contains headings, narrative text, code, citations, links, and cross-references.
+I'll show you some example files in a minute but it helps to understand a little
+about the anatomy of a Quarto script first. It is just a plain text file with a
+name that ends in `.qmd`. It uses a simple markdown syntax to format the output
+it will render. The top of the file is the YAML header, which contains
+document-level metadata, options, and parameters. The body of the file contains
+things like headings, narrative text, lists, citations, callout boxes, code,
+equations, tables, figures, cross-references, and reference lists.
 :::
 
 ## Quarto Scripts: Code {background-image="graphics/pexels-goumbik-574069.jpg"}
