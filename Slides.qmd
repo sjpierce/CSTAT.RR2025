@@ -804,14 +804,15 @@ several projects.
 ::::
 
 ::: {.notes}
-Plan your work as a collaborative effort with multiple stakeholders. Knowing you
-will share files with several kinds of people orients you to the need to
-communicate what you are doing, how the materials are organized, and how they
-can be used to reproduce results. It motivates you to make things clear and
-include good documentation. Notice here that I include your future self as a 
-stakeholder. To paraphrase a former colleague "your worst collaborator is often 
-the you from 6 months ago who skipped writing down some key details because you 
-foolishly assumed you'd remember them later."
+Plan your work as a collaborative effort with multiple stakeholders, such your
+future self, your team, peer reviewers, and your audience. Knowing you will
+share files with several kinds of people orients you to the need to communicate
+what you are doing, how the materials are organized, and how they can be used to
+reproduce results. It motivates you to make things clear and include good
+documentation. But why do I  include your future self as a stakeholder? To
+paraphrase a former colleague "your worst collaborator is often the you from 6
+months ago who skipped writing down some key details because you foolishly
+assumed you'd remember them later."
 
 *Time elapsed should be ~22-24 min by this point.*
 :::
@@ -1014,8 +1015,8 @@ about the anatomy of a Quarto script first. It is just a plain text file with a
 name that ends in `.qmd`. It uses a simple markdown syntax to format the output
 it will render. The top of the file is the YAML header, which contains
 document-level metadata, options, and parameters. The body of the file contains
-things like headings, narrative text, lists, citations, callout boxes, code,
-equations, tables, figures, cross-references, and reference lists.
+your main content, including things like headings, narrative text, lists, and 
+all these other elements that I've listed here.
 :::
 
 ## Quarto Scripts: Code {background-image="graphics/pexels-goumbik-574069.jpg"}
